@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 })
 public class Usuario {
 	
-	private Integer usuarioId;
+	private Long usuarioId;
 	private String codigoUsuario;
 	private String password;
 	private Date fechaCreacion;
@@ -34,11 +34,11 @@ public class Usuario {
 	@SequenceGenerator(name="Usuario_Gen", sequenceName="Usuario_Seq")
 	@Id @GeneratedValue(generator="Usuario_Gen")
     @Column(name="USUARIO_ID", nullable= false)
-	public Integer getUsuarioId() {
+	public Long getUsuarioId() {
 		return usuarioId;
 	}
 
-	public void setUsuarioId(Integer usuario_id) {
+	public void setUsuarioId(Long usuario_id) {
 		this.usuarioId = usuario_id;
 	}
 

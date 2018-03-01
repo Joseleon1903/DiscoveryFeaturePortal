@@ -1,6 +1,8 @@
 com\discovery\feature\portal\mvc\constante\ParametrosErrorConstantes.class
 com\discovery\feature\portal\mvc\entity\Usuario$Columnas.class
+com\discovery\feature\portal\mvc\dao\UsuarioDao.class
 com\discovery\feature\portal\mvc\entity\Usuario$Query.class
+com\discovery\feature\portal\mvc\dao\impl\UsuarioDaoImpl.class
 com\discovery\feature\portal\mvc\jpa\util\PersistenceManager.class
 com\discovery\feature\portal\mvc\entity\Usuario.class
 com\discovery\feature\portal\mvc\constante\ParametrosSistemaConstantes.class

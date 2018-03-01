@@ -1,3 +1,4 @@
+C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\dao\impl\UsuarioDaoImpl.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\jpa\util\ParameterExpression.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\controller\LoginController.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\jpa\util\PersistenceManager.java
@@ -5,6 +6,7 @@ C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\c
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\type\UsuarioType.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\constante\ParametrosSistemaConstantes.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\jpa\util\AbstractJpaDao.java
+C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\dao\UsuarioDao.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\rest\controller\UsuarioController.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\constante\ParametrosErrorConstantes.java
 C:\Users\jleon\git\DiscoveryFeaturePortal\DiscoveryFeaturePortal\src\main\java\com\discovery\feature\portal\mvc\util\ValidationUtil.java
