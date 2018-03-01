@@ -7,6 +7,11 @@
                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 	<context:component-scan base-package="com.discovery.feature.portal.mvc.controller" />
+	
+	<context:component-scan base-package="com.discovery.feature.portal.mvc.rest.controller"/>
+	
+	<context:component-scan base-package="com.discovery.feature.portal.mvc.dao.impl" />
+	<context:component-scan base-package="com.discovery.feature.portal.mvc.dao" />
 
 	<!-- 	bean necesario para el utilizo de anotaciones  PostConstruct y PreDestroy -->
 	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"> </bean>
