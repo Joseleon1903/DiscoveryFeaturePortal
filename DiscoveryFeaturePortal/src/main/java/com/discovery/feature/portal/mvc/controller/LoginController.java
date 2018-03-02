@@ -17,7 +17,7 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String displayLogin(HttpServletRequest request, Model model) {
 		logger.info("redirigiendo pagina inicio.");
-		return  "index";
+		return  "portal/index";
 	}
 
 }

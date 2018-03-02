@@ -8,10 +8,13 @@
 	
 		<jta-data-source>java:jboss/OracleDataSource</jta-data-source>
 		<class>com.discovery.feature.portal.mvc.entity.Usuario</class>
-
+		<class>com.discovery.feature.portal.mvc.entity.AntecedenteTab</class>
+		<class>com.discovery.feature.portal.mvc.entity.FeatureTab</class>
+		<class>com.discovery.feature.portal.mvc.entity.EscenarioTab</class>
+		
 		<properties>
 			<!-- Properties for Hibernate -->
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
             <property name="org.hibernate.dialect.Dialect" value="org.hibernate.dialect.Oracle11gDialect"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.use_sql_comments" value="true"/>

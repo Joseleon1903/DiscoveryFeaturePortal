@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-<h1>Welcome to Spring aplication</h1>
+   <c:redirect url="portal/index.html"/>
 
   
 </body>
