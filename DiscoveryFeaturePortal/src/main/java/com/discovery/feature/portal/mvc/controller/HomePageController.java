@@ -4,18 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/")
-public class LoginController {
+public class HomePageController {
 
-	private static final Logger logger = Logger.getLogger(LoginController.class);
+	private static final Logger logger = Logger.getLogger(HomePageController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String displayLogin(HttpServletRequest request, Model model) {
+	public String displayLogin(HttpServletRequest request) {
 		logger.info("redirigiendo pagina inicio.");
 		return  "portal/index";
 	}
