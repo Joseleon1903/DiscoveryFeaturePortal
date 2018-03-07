@@ -1,9 +1,9 @@
+com\discovery\feature\portal\mvc\entity\FeatureTab$NameQuery.class
 com\discovery\feature\portal\mvc\commons\interfaces\BuscableType.class
 com\discovery\feature\portal\mvc\type\EscenarioType.class
 com\discovery\feature\portal\mvc\entity\Usuario$Columnas.class
 com\discovery\feature\portal\mvc\dao\UsuarioDao.class
 com\discovery\feature\portal\mvc\entity\Usuario$Query.class
-com\discovery\feature\portal\mvc\jpa\util\PersistenceManager.class
 com\discovery\feature\portal\mvc\entity\Usuario.class
 com\discovery\feature\portal\mvc\rest\controller\FeatureController.class
 com\discovery\feature\portal\mvc\entity\EscenarioTab.class

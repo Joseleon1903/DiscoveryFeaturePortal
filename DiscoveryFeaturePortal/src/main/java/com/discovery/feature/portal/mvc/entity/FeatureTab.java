@@ -103,6 +103,15 @@ public class FeatureTab {
 				+ caracteristica + "]";
 	}
 	
-	
+	/**
+	 * Query de la entidad
+	 * 
+	 * @author Jose Eduardo
+	 *
+	 */
+	public static interface NameQuery{
+		String FIND_ALL = "FeatureTab.BuscarTodos";
+		String FIND_BY_ID = "FeatureTab.BuscarPorId";
+	}
 
 }
