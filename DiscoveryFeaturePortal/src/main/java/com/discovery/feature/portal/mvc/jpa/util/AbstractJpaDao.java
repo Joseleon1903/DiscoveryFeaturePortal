@@ -17,6 +17,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
 	protected Class<E> entityClass;
 	protected E entity;
 	
@@ -27,7 +28,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	 * Descripcion: Metodo que permite elimninar una entidad por su Id.
 	 * 
 	 * @param id
-	 * @return
+	 * @return 
 	 */
     public E removeById(Class<E> clazz, ID id) throws PersistenceException {
     		
@@ -126,8 +127,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	public void registrarEntity(E entity) throws PersistenceException, EntityExistsException {
 		try {
 			entityManager.persist(entity);
-//			entityManager.flush();
-//			entityManager.getTransaction().commit();
+			entityManager.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			logger.info(e.getMessage());
 			throw new EntityExistsException(e);

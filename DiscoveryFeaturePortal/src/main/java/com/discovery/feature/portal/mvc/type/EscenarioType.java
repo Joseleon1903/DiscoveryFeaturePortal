@@ -1,12 +1,18 @@
 package com.discovery.feature.portal.mvc.type;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.discovery.feature.portal.mvc.commons.interfaces.BuscableType;
 import com.discovery.feature.portal.mvc.entity.EscenarioTab;
 
 public class EscenarioType implements Serializable, BuscableType<EscenarioType, EscenarioTab>{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2484219161669741058L;
 	
 	private long escenarioId;
 	private String contenido;
@@ -15,15 +21,11 @@ public class EscenarioType implements Serializable, BuscableType<EscenarioType, 
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 	public EscenarioType(long escenarioId, String contenido) {
 		super();
 		this.escenarioId = escenarioId;
 		this.contenido = contenido;
 	}
-
-
 
 	public long getEscenarioId() {
 		return escenarioId;
@@ -48,20 +50,26 @@ public class EscenarioType implements Serializable, BuscableType<EscenarioType, 
 
 	@Override
 	public EscenarioType toType(EscenarioTab entity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.escenarioId = entity.getEscenarioId();
+		this.contenido = entity.getContenido();
+		return this;
 	}
 
 	@Override
 	public EscenarioTab toEntity(EscenarioType type) {
-		// TODO Auto-generated method stub
-		return null;
+		EscenarioTab entity = new EscenarioTab();
+		entity.setEscenarioId(type.getEscenarioId());
+		entity.setContenido(type.getContenido());
+		return entity;
 	}
 
 	@Override
 	public List<EscenarioType> toListType(List<EscenarioTab> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+		List<EscenarioType> listType = new ArrayList<>();
+		for (EscenarioTab escenarioTab : entityList) {
+			listType.add(new EscenarioType().toType(escenarioTab));
+		}
+		return listType;
 	}
 
 }

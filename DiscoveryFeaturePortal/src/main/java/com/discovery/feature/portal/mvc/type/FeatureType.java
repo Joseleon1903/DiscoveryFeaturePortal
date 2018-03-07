@@ -9,6 +9,11 @@ import com.discovery.feature.portal.mvc.entity.FeatureTab;
 
 public class FeatureType implements Serializable, BuscableType<FeatureType, FeatureTab> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8627271860838190961L;
+	
 	private long featureId;
 	private String nombre;
 	private String idioma;
@@ -17,9 +22,7 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	private List<AntecedenteType> antecedentes;
 	private List<EscenarioType> escenarios;
 
-	public FeatureType() {
-		// TODO Auto-generated constructor stub
-	}	
+	public FeatureType() {}	
 
 	public FeatureType(long featureId, String nombre, String idioma, String caracteristica,
 			List<AntecedenteType> antecedentes, List<EscenarioType> escenarios) {
@@ -65,6 +68,9 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	}
 
 	public List<AntecedenteType> getAntecedentes() {
+		if (antecedentes == null) {
+			antecedentes = new ArrayList<>();
+		}
 		return antecedentes;
 	}
 
@@ -73,6 +79,9 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	}
 
 	public List<EscenarioType> getEscenarios() {
+		if (escenarios ==null) {
+			escenarios = new ArrayList<>();
+		}
 		return escenarios;
 	}
 
@@ -91,7 +100,13 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 		this.nombre = entity.getNombre();
 		this.featureId = entity.getFeatureId();
 		this.idioma = entity.getIdioma();
-		this.caracteristica = entity.getCaracteristica();		
+		this.caracteristica = entity.getCaracteristica();
+		if (!entity.getAntecedentes().isEmpty()) {
+			this.getAntecedentes().addAll(new AntecedenteType().toListType(entity.getAntecedentes()));
+		}
+		if (!entity.getEscenarios().isEmpty()) {
+			this.getEscenarios().addAll(new EscenarioType().toListType(entity.getEscenarios()));
+		}
 		return this;
 	}
 
@@ -102,6 +117,16 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 		entity.setNombre(type.getNombre());
 		entity.setIdioma(type.getIdioma());
 		entity.setCaracteristica(type.getCaracteristica());
+		if (!type.getAntecedentes().isEmpty()) {
+			for (AntecedenteType anteType : type.getAntecedentes()) {
+				entity.getAntecedentes().add(new AntecedenteType().toEntity(anteType));
+			}
+		}
+		if (!type.getEscenarios().isEmpty()) {
+			for (EscenarioType esceType : type.getEscenarios()) {
+				entity.getEscenarios().add(new EscenarioType().toEntity(esceType));
+			}
+		}
 		return entity;
 	}
 
@@ -113,6 +138,5 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 		}
 		return typeList;
 	}
-
 
 }
