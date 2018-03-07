@@ -186,22 +186,27 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.5.2</version>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.3</version>
+			<version>2.7.0</version>
 		</dependency>
-		
-			<!-- dependencias hibernate -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>2.8.4</version>
+		</dependency>
+
+		<!-- dependencias hibernate -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -214,7 +219,14 @@
 			<version>5.2.12.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		
+ 
+<!--          libreria json de google -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -253,7 +265,7 @@
 							<ignoreMissingDeployment>true</ignoreMissingDeployment>
 						</configuration>
 					</execution>
-<!-- 					Deploy the application on install -->
+					<!-- Deploy the application on install -->
 					<execution>
 						<id>deploy</id>
 						<phase>install</phase>
