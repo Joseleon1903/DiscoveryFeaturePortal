@@ -5,9 +5,9 @@ import java.util.Map;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -15,28 +15,14 @@ import org.jboss.logging.Logger;
 
 public abstract class AbstractJpaDao<ID, E> {
 	
-	private EntityManager entityManager;
-	private PersistenceManager persistenceManager;
+	@PersistenceContext
+	protected EntityManager entityManager;
 	protected Class<E> entityClass;
 	protected E entity;
 	
 	private static final Logger logger = Logger.getLogger(AbstractJpaDao.class.getName());
 
-	public AbstractJpaDao(EntityManager entityManager) {
-		this.entityManager = entityManager;
-//		this.entityManager = (EntityManager) entityManager.getTransaction();
-	}
-	
-	public AbstractJpaDao(EntityManagerFactory entityManagerFactory) {
-		this.entityManager = entityManagerFactory.createEntityManager();
-	}
-	
-	public AbstractJpaDao(PersistenceManager persistenceManager) {
-		persistenceManager = new PersistenceManager();
-		this.persistenceManager = persistenceManager;
-		this.entityManager = persistenceManager.getPersistenceManager();
-	}
-
+		
 	/**
 	 * Descripcion: Metodo que permite elimninar una entidad por su Id.
 	 * 
