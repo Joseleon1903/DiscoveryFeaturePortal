@@ -1,11 +1,12 @@
 package com.discovery.feature.portal.mvc.type;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.discovery.feature.portal.mvc.commons.interfaces.BuscableType;
 import com.discovery.feature.portal.mvc.entity.EscenarioTab;
 
-public class EscenarioType implements BuscableType<EscenarioType, EscenarioTab>{
+public class EscenarioType implements Serializable, BuscableType<EscenarioType, EscenarioTab>{
 	
 	private long escenarioId;
 	private String contenido;
