@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/home")
 public class HomePageController {
 
 	private static final Logger logger = Logger.getLogger(HomePageController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String displayLogin(HttpServletRequest request) {
-		logger.info("redirigiendo pagina inicio.");
-		return  "portal/index";
+	public String displayHome(HttpServletRequest request) {
+		logger.info("redirigiendo pagina home.");
+		return  "portal/dashboard/dashboardPage";
 	}
+
 
 }

@@ -6,6 +6,7 @@ com\discovery\feature\portal\mvc\dao\UsuarioDao.class
 com\discovery\feature\portal\mvc\entity\Usuario$Query.class
 com\discovery\feature\portal\mvc\entity\Usuario.class
 com\discovery\feature\portal\mvc\rest\controller\FeatureController.class
+com\discovery\feature\portal\mvc\controller\LoginController.class
 com\discovery\feature\portal\mvc\entity\EscenarioTab.class
 com\discovery\feature\portal\mvc\jpa\util\DatabaseUtil.class
 com\discovery\feature\portal\mvc\constante\ParametrosErrorConstantes.class

@@ -1,4 +1,4 @@
 /**
  * 
  */
-alert('iniciando js');
+console.log('iniciando js');
