@@ -20,6 +20,8 @@
     <!-- Custom Fonts -->
     <link href="<c:url value="/static/resources/assets/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
 <script type="text/javascript" src="<c:url value="/static/resources/js/index.js"/>"></script>
 <body>
 

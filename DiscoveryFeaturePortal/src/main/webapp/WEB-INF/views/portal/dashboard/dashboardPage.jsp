@@ -24,6 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
 <script type="text/javascript" src="<c:url value="/static/resources/js/index.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/resources/js/requestRouter.js"/>"></script>
 <body>
 
 	<div id="wrapper">

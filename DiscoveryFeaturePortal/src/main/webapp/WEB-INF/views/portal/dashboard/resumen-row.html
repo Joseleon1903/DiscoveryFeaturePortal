@@ -55,18 +55,11 @@ new Vue({
     },
 	created: function(){
 		console.log('iniciando vue.');
-			 this.$http.get('http://localhost:8081/DiscoveryFeaturePortal/EstadisticaController/buscarUltima/').then(response => {
-	                console.log('response: '+response.data);
-	                this.totalPatallas = response.data.contadorPantalla;
-	                this.totalFlujos = response.data.contadorFlujo;
-	            }, response => {
-	                console.log('response error : '+response.status)
-	            });
+		var self = this;
+		var repons = setRequestGetBase(self, 'EstadisticaController/buscarUltima/');
     },
     
-	
-	
-	
+
 });
 
 

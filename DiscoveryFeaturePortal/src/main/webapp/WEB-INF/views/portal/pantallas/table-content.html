@@ -1,4 +1,4 @@
-<div class="col-lg-12">
+<div class="col-lg-12" id="view-pantalla">
 	<div class="panel panel-default">
 		<div class="panel-heading">DataTables Advanced Tables</div>
 		<!-- /.panel-heading -->
@@ -34,9 +34,9 @@
 								<tr role="row">
 									<th style="width: 50px;">Identificador</th>
 									<th style="width: 50px;">Idioma</th>
-									<th style="width: 130px;">Nombre</th>
+									<th style="width: 80px;">Nombre</th>
 									<th style="width: 180px;">Caracteristica</th>
-									<th style="width: 50px;">Fecha ultima actualización</th>
+									<th style="width: 50px;">Fecha ultima actualizaciï¿½n</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -55,6 +55,13 @@
 									<td class="center">1.8</td>
 									<td class="center">2018-02-03</td>
 								</tr>
+								<tr class="gradeA odd" role="row" v-for="feature in featureList">
+								<td class="">{{feature.featureId}}</td>
+								<td class="">{{feature.idioma}}</td>
+								<td class="">{{feature.nombre}}</td>
+								<td class="">{{feature.caracteristica}}</td>
+								<td class="">{{feature.fechaUltimaActualizacion}}</td>
+							</tr>
 							</tbody>
 						</table>
 					</div>
@@ -98,3 +105,35 @@
 	</div>
 	<!-- /.panel -->
 </div>
+<script>
+
+new Vue({
+	el: '#view-pantalla',
+	data : {
+    	feature: { featureId: 0,nombre:"", idioma: "", fechaUltimaActualizacion: "", caracteristica:""},
+    	featureList: [],
+    },
+	created: function(){
+		console.log('iniciando vue pantalla.');
+		this.buscarFeaturePantalla();
+    },
+    methods:{
+    	 buscarFeaturePantalla: function () {
+    		 this.$http.get(URL_BASE+"Feature/buscarPantallas").then(response => {
+    	         this.featureList = response.data;
+    	     }, response => {
+    	         console.log('response error : '+response.status);
+    	     }); 
+    	 },
+    	    	
+    	
+    }
+    
+    
+
+});
+
+
+
+
+</script>
