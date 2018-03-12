@@ -16,7 +16,6 @@ import com.discovery.feature.portal.mvc.type.FeatureType;
 public class FeatureDaoImpl extends AbstractJpaDao<Long ,FeatureTab > implements FeatureDao {
 
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public FeatureType[] buscarTodosLosFeature() {
 		List<FeatureTab> listaEntity = null;

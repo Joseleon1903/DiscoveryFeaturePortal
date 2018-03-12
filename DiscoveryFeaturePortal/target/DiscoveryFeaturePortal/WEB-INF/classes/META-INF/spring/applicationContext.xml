@@ -19,6 +19,7 @@
       </property>
       <property name="jpaProperties">
          <props>
+<!--             <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
             <prop key="org.hibernate.dialect.Dialect">org.hibernate.dialect.Oracle11gDialect</prop>
          </props>
       </property>

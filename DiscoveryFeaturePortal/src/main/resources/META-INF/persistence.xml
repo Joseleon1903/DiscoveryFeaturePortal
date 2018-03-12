@@ -11,6 +11,7 @@
 		<class>com.discovery.feature.portal.mvc.entity.AntecedenteTab</class>
 		<class>com.discovery.feature.portal.mvc.entity.FeatureTab</class>
 		<class>com.discovery.feature.portal.mvc.entity.EscenarioTab</class>
+		<class>com.discovery.feature.portal.mvc.entity.EstadisticaReportTab</class>
 		
 		<properties>
 			<!-- Properties for Hibernate -->
