@@ -1,5 +1,7 @@
 <div class="col-lg-12" id="view-pantalla">
-	<div class="panel panel-default">
+
+<transition name="slide-fade">
+	<div class="panel panel-default" v-if="showViewA">
 		<div class="panel-heading">DataTables Advanced Tables</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -8,7 +10,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_length" id="dataTables-example_length" >
-							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"><option
+							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" v-model="pageShow"><option
 										value="10">10</option>
 									<option value="25">25</option>
 									<option value="50">50</option>
@@ -20,7 +22,7 @@
 						<div id="dataTables-example_filter" class="dataTables_filter" style="float: right;">
 							<label>Search:<input type="search"
 								class="form-control input-sm" placeholder=""
-								aria-controls="dataTables-example"></label>
+								aria-controls="dataTables-example" @click="prueba()"></label>
 						</div>
 					</div>
 				</div>
@@ -36,26 +38,11 @@
 									<th style="width: 50px;">Idioma</th>
 									<th style="width: 80px;">Nombre</th>
 									<th style="width: 180px;">Caracteristica</th>
-									<th style="width: 50px;">Fecha ultima actualizaci�n</th>
+									<th style="width: 50px;">Fecha ultima actualización</th>
 								</tr>
 							</thead>
 							<tbody>
-							
-								<tr class="gradeA odd" role="row">
-									<td class="sorting_1">Gecko</td>
-									<td>Firefox 1.0</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.7</td>
-									<td class="center">2017-02-03</td>
-								</tr>
-								<tr class="gradeA even" role="row">
-									<td class="sorting_1">Gecko</td>
-									<td>Firefox 1.5</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.8</td>
-									<td class="center">2018-02-03</td>
-								</tr>
-								<tr class="gradeA odd" role="row" v-for="feature in featureList">
+								<tr class="gradeA odd" role="row" v-for="feature in featureList" @dblclick="showViewA = !showViewA">
 								<td class="">{{feature.featureId}}</td>
 								<td class="">{{feature.idioma}}</td>
 								<td class="">{{feature.nombre}}</td>
@@ -78,23 +65,11 @@
 							<ul class="pagination">
 								<li class="paginate_button previous disabled"
 									aria-controls="dataTables-example" tabindex="0"
-									id="dataTables-example_previous"><a href="#">Previous</a></li>
+									id="dataTables-example_previous"><a href="#" @click="previousPage()">Previous</a></li>
 								<li class="paginate_button active"
-									aria-controls="dataTables-example" tabindex="0"><a
-									href="#">1</a></li>
-								<li class="paginate_button " aria-controls="dataTables-example"
-									tabindex="0"><a href="#">2</a></li>
-								<li class="paginate_button " aria-controls="dataTables-example"
-									tabindex="0"><a href="#">3</a></li>
-								<li class="paginate_button " aria-controls="dataTables-example"
-									tabindex="0"><a href="#">4</a></li>
-								<li class="paginate_button " aria-controls="dataTables-example"
-									tabindex="0"><a href="#">5</a></li>
-								<li class="paginate_button " aria-controls="dataTables-example"
-									tabindex="0"><a href="#">6</a></li>
+									aria-controls="dataTables-example" tabindex="0" v-for="num in numeroPaginas"><a>{{num}}</a></li>
 								<li class="paginate_button next"
-									aria-controls="dataTables-example" tabindex="0"
-									id="dataTables-example_next"><a href="#">Next</a></li>
+									aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a @click="nextPage()">Next</a></li>
 							</ul>
 						</div>
 					</div>
@@ -104,26 +79,65 @@
 		<!-- /.panel-body -->
 	</div>
 	<!-- /.panel -->
+</transition>
+
+<transition>
+<div class="col-lg-4" v-if="!showViewA">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <button @click="showViewA = !showViewA"> click</button>
+              Default Panel
+          </div>
+          <div class="panel-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+          </div>
+          <div class="panel-footer">
+              Panel Footer
+          </div>
+      </div>
+  </div>
+
+</transition>
+
 </div>
 <script>
 
+             
 new Vue({
 	el: '#view-pantalla',
 	data : {
     	feature: { featureId: 0,nombre:"", idioma: "", fechaUltimaActualizacion: "", caracteristica:""},
     	featureList: [],
+    	numeroPaginas: 1,
+    	pageShow: 10,
+    	showViewA:true,
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
-		this.buscarFeaturePantalla();
+		this.buscarFeaturePantalla(10,1);
     },
     methods:{
-    	 buscarFeaturePantalla: function () {
-    		 this.$http.get(URL_BASE+"Feature/buscarPantallas").then(response => {
+    	 buscarFeaturePantalla: function (showNumber, pageIndex) {
+    		 this.$http.get(URL_BASE+"Feature/buscarPantallas/"+showNumber+"/"+pageIndex).then(response => {
     	         this.featureList = response.data;
     	     }, response => {
     	         console.log('response error : '+response.status);
     	     }); 
+    	 },
+    	 prueba: function(){
+    		console.log('prueba'); 
+    		console.log('pageShow: '+this.pageShow);
+    		console.log('numeroPaginas: '+this.numeroPaginas);
+    	 },
+    	 cambioPagina:function(){
+    		 
+    		 
+    	 },
+    	 nextPage:function(){
+    		 console.log('nextPage');
+    	 },
+    	 previousPage:function(){
+    		 console.log('previousPage'); 
     	 },
     	    	
     	

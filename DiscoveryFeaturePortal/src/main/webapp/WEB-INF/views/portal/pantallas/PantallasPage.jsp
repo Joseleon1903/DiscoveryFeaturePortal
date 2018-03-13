@@ -13,6 +13,7 @@
 
     <!-- Custom CSS -->
     <link href="<c:url value="/static/resources/dist/css/sb-admin-2.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/resources/css/indexStyle.css"/>" rel="stylesheet">
     
      <!-- Morris Charts CSS -->
     <link href="<c:url value="/static/resources/assets/morrisjs/morris.css"/>" rel="stylesheet">
