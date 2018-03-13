@@ -17,15 +17,15 @@ import com.discovery.feature.portal.mvc.entity.Usuario;
 public class UsuarioController {
 
 	private static final Logger logger = Logger.getLogger(UsuarioController.class);
-	
+
 	@Autowired
 	@Qualifier("usuarioDaoImpl")
 	private UsuarioDaoImpl usuarioDAO;
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Usuario findOne(@PathVariable("id") Long id) {
-		logger.info("Id "+ id);
+		logger.info("Id " + id);
 		Usuario user = usuarioDAO.findByUsers(id);
 		return user;
 	}

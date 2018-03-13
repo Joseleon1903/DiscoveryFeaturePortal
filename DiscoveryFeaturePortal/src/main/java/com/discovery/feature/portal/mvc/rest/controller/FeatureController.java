@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,10 +35,10 @@ public class FeatureController {
 		return json;
 	}
 	
-	@RequestMapping(value = "/buscarPantallas", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public @ResponseBody String findAllPantallas() {
+	@RequestMapping(value = "/buscarPantallas/{pagesize}/{pagenumber}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findAllPantallas(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber) {
 		logger.info("ejecutando metodo buscarTodos");
-		List<BuscarFeatureType> lista = featureDao.buscarFeaturePantalla();
+		List<BuscarFeatureType> lista = featureDao.buscarFeaturePantalla(pagesize,pageNumber);
 		String json = new Gson().toJson(lista);
 		return json;
 	}

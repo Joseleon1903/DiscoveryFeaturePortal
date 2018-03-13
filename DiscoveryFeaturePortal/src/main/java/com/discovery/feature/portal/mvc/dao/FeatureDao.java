@@ -12,6 +12,6 @@ public interface FeatureDao {
 
 	List<FeatureType> buscarTodosLosFeature();
 	
-	List<BuscarFeatureType> buscarFeaturePantalla();
+	List<BuscarFeatureType> buscarFeaturePantalla(int pageSize, int pageNumber);
 
 }
