@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_length" id="dataTables-example_length" >
-							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" v-model="pageShow"><option
+							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" v-model="pageShow" @change="cambioPagina()"><option
 										value="10">10</option>
 									<option value="25">25</option>
 									<option value="50">50</option>
@@ -56,7 +56,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_info" id="dataTables-example_info"
-							role="status" aria-live="polite">Showing 1 to 10 of 57
+							role="status" aria-live="polite">Showing {{numberPageSelected}} to {{pageShow}} of {{totalRegistros}}
 							entries</div>
 					</div>
 					<div class="col-sm-6">
@@ -67,7 +67,7 @@
 									aria-controls="dataTables-example" tabindex="0"
 									id="dataTables-example_previous"><a href="#" @click="previousPage()">Previous</a></li>
 								<li class="paginate_button active"
-									aria-controls="dataTables-example" tabindex="0" v-for="num in numeroPaginas"><a>{{num}}</a></li>
+									aria-controls="dataTables-example" tabindex="0" v-for="num in paginasTotal"><a @click="cambioPagina(num)">{{num}}</a></li>
 								<li class="paginate_button next"
 									aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a @click="nextPage()">Next</a></li>
 							</ul>
@@ -123,15 +123,19 @@ new Vue({
     	titleDetalle: '',
     	antecedentes: [],
     	escenarios: [],
+    	totalRegistros: 0,
+    	numberPageSelected: 1,
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
-		this.buscarFeaturePantalla(10,1);
+		this.buscarFeaturePantalla(this.pageShow,this.numeroPaginas);
     },
     methods:{
     	 buscarFeaturePantalla: function (showNumber, pageIndex) {
     		 this.$http.get(URL_BASE+"Feature/buscarPantallas/"+showNumber+"/"+pageIndex).then(response => {
-    	         this.featureList = response.data;
+    	         this.featureList = response.data.typeList;
+    	         this.totalRegistros = response.data.pagination.registrosRestantes;
+    	         this.numeroPaginas = Math.ceil(this.totalRegistros / this.pageShow);
     	     }, response => {
     	         console.log('response error : '+response.status);
     	     }); 
@@ -149,20 +153,22 @@ new Vue({
     		console.log('pageShow: '+this.pageShow);
     		console.log('numeroPaginas: '+this.numeroPaginas);
     	 },
-    	 cambioPagina:function(paginaMostrar, numeroPagina){
-    		 
-    		 
+    	 cambioPagina:function(numeroPagina){
+    		 if ($.isEmptyObject(numeroPagina)) {
+    			 numeroPagina = 1;
+			}
+    		this.buscarFeaturePantalla(this.pageShow, numeroPagina);
     	 },
     	 nextPage:function(){
-    		 if ((this.numeroPaginas + 1) < this.numeroPaginas) {
-    			 this.pageShow =this.pageShow + 1;
-    			 this.buscarFeaturePantalla();
+    		 if ((this.numberPageSelected + 1) <= this.numeroPaginas) {
+    			 this.numberPageSelected =this.numberPageSelected + 1;
+    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
 			}
     	 },
     	 previousPage:function(){
-    		 if ((this.numeroPaginas - 1) < 1) {
-    			 this.pageShow =this.pageShow - 1;
-    			 this.buscarFeaturePantalla();
+    		 if ((this.numberPageSelected - 1) >= 1) {
+    			 this.numberPageSelected =this.numberPageSelected - 1;
+    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
 			}
     	 },
     	 showDetalleFeature:function(feature){
@@ -174,11 +180,15 @@ new Vue({
     	 retunPageFeature:function(){
     		 this.showViewA = !this.showViewA;
     	 }
+    },
+    computed:{
+    	paginasTotal: function () {
+    		var data = this.numeroPaginas;
+    		return data;
+    	},
+    	
     }
 
 });
-
-
-
 
 </script>

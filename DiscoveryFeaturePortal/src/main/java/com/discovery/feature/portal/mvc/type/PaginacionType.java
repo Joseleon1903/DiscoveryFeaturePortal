@@ -4,22 +4,27 @@ import java.io.Serializable;
 
 public class PaginacionType implements Serializable{
 	
-	private Integer registrosRestantes;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3895019041005238018L;
+	
+	private Long registrosRestantes;
 	private Integer indexPage;
 
 	public PaginacionType() {}
 	
-	public PaginacionType(Integer registrosRestantes, Integer indexPage) {
+	public PaginacionType(Long registrosRestantes, Integer indexPage) {
 		super();
 		this.registrosRestantes = registrosRestantes;
 		this.indexPage = indexPage;
 	}
 	
-	public Integer getRegistrosRestantes() {
+	public Long getRegistrosRestantes() {
 		return registrosRestantes;
 	}
 
-	public void setRegistrosRestantes(Integer registrosRestantes) {
+	public void setRegistrosRestantes(Long registrosRestantes) {
 		this.registrosRestantes = registrosRestantes;
 	}
 

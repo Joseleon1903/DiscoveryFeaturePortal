@@ -1,6 +1,7 @@
 package com.discovery.feature.portal.mvc.type;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResponsePaginationType implements Serializable{
@@ -16,6 +17,9 @@ public class ResponsePaginationType implements Serializable{
 	public ResponsePaginationType() {}
 
 	public List<Object> getTypeList() {
+		if (typeList == null) {
+			typeList = new ArrayList<>();
+		}
 		return typeList;
 	}
 

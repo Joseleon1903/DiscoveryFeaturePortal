@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.discovery.feature.portal.mvc.dao.impl.FeatureDaoImpl;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
-import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
+import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
 import com.google.gson.Gson;
 
 @Controller
@@ -39,8 +39,8 @@ public class FeatureController {
 	@RequestMapping(value = "/buscarPantallas/{pagesize}/{pagenumber}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public @ResponseBody String findAllPantallas(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber) {
 		logger.info("ejecutando metodo findAllPantallas");
-		List<BuscarFeatureType> lista = featureDao.buscarFeaturePantalla(pagesize,pageNumber);
-		String json = new Gson().toJson(lista);
+		ResponsePaginationType response = featureDao.buscarFeaturePantalla(pagesize,pageNumber);
+		String json = new Gson().toJson(response);
 		return json;
 	}
 	

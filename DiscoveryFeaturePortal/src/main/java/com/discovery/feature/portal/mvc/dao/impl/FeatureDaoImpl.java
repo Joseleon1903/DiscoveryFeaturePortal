@@ -16,6 +16,8 @@ import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
+import com.discovery.feature.portal.mvc.type.PaginacionType;
+import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
 
 @Repository
 public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements FeatureDao {
@@ -34,7 +36,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 	}
 
 	@Override
-	public List<BuscarFeatureType> buscarFeaturePantalla(int pageSize, int pageNumber) {
+	public ResponsePaginationType buscarFeaturePantalla(int pageSize, int pageNumber) {
 		logger.info("Entrando en el metodo buscarFeaturePantalla..");
 		String countQ = "Select count (f.featureId) from FeatureTab f";
 		Query countQuery = entityManager.createQuery(countQ);
@@ -47,7 +49,14 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		selectQuery.setMaxResults(pageSize);
 		@SuppressWarnings("unchecked")
 		List<FeatureTab> lastPage = selectQuery.getResultList();
-		return FeatureMapping.toListBuscarBuscarFeatureType(lastPage);
+		List<BuscarFeatureType> listaSalida = FeatureMapping.toListBuscarBuscarFeatureType(lastPage);
+		ResponsePaginationType response = new ResponsePaginationType();
+		response.getTypeList().addAll(listaSalida);
+		PaginacionType pagination = new PaginacionType();
+		pagination.setIndexPage(pageNumber);
+		pagination.setRegistrosRestantes(countResults);
+		response.setPagination(pagination);
+		return response;
 	}
 
 	@Override
