@@ -1,8 +1,9 @@
 package com.discovery.feature.portal.mvc.type;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BuscarFeatureType {
+public class BuscarFeatureType implements Serializable{
 	
 	private long featureId;
 	private String nombre;

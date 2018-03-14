@@ -42,7 +42,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="gradeA odd" role="row" v-for="feature in featureList" @dblclick="showViewA = !showViewA">
+								<tr class="gradeA odd" role="row" v-for="feature in featureList" @dblclick="showDetalleFeature(feature)">
 								<td class="">{{feature.featureId}}</td>
 								<td class="">{{feature.idioma}}</td>
 								<td class="">{{feature.nombre}}</td>
@@ -63,7 +63,7 @@
 						<div class="dataTables_paginate paging_simple_numbers"
 							id="dataTables-example_paginate">
 							<ul class="pagination">
-								<li class="paginate_button previous disabled"
+								<li class="paginate_button previous"
 									aria-controls="dataTables-example" tabindex="0"
 									id="dataTables-example_previous"><a href="#" @click="previousPage()">Previous</a></li>
 								<li class="paginate_button active"
@@ -81,24 +81,32 @@
 	<!-- /.panel -->
 </transition>
 
-<transition>
+<transition name="slide-fade">
 <div class="col-lg-4" v-if="!showViewA">
       <div class="panel panel-default">
-          <div class="panel-heading">
-            <button @click="showViewA = !showViewA"> click</button>
-              Default Panel
-          </div>
+          <div class="panel-heading"><h3><b>{{titleDetalle}}</b></h3></div>
           <div class="panel-body">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+          <h4><b>Antecedentes</b></h4>
+           <blockquote>
+               <ul>
+               <li v-for="ant in antecedentes">{{ant.contenido}}</li>
+               </ul>
+           </blockquote>
+           </br>
+           <h4><b>Escenarios</b></h4>
+           <blockquote>
+               <ul>
+               <li v-for="esc in escenarios">{{esc.contenido}}</li>
+               </ul>
+           </blockquote>
           </div>
-          <div class="panel-footer">
-              Panel Footer
+          <div class="panel-footer" style="float: right;">
+              <button type="button" class="fa-arrow-circle-left btn btn-default" @click="retunPageFeature()">Back</button>
           </div>
       </div>
   </div>
 
 </transition>
-
 </div>
 <script>
 
@@ -108,9 +116,13 @@ new Vue({
 	data : {
     	feature: { featureId: 0,nombre:"", idioma: "", fechaUltimaActualizacion: "", caracteristica:""},
     	featureList: [],
+    	detalleList: [],
     	numeroPaginas: 1,
     	pageShow: 10,
     	showViewA:true,
+    	titleDetalle: '',
+    	antecedentes: [],
+    	escenarios: [],
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
@@ -124,26 +136,45 @@ new Vue({
     	         console.log('response error : '+response.status);
     	     }); 
     	 },
+    	 buscarDetalleFeature: function (featureId) {
+    		 this.$http.get(URL_BASE+"Feature/buscarDetallefeature/"+featureId).then(response => {
+    	         this.antecedentes = response.data.antecedentes;
+    	         this.escenarios = response.data.escenarios;
+    	     }, response => {
+    	         console.log('response error : '+response.status);
+    	     }); 
+    	 },
     	 prueba: function(){
     		console.log('prueba'); 
     		console.log('pageShow: '+this.pageShow);
     		console.log('numeroPaginas: '+this.numeroPaginas);
     	 },
-    	 cambioPagina:function(){
+    	 cambioPagina:function(paginaMostrar, numeroPagina){
     		 
     		 
     	 },
     	 nextPage:function(){
-    		 console.log('nextPage');
+    		 if ((this.numeroPaginas + 1) < this.numeroPaginas) {
+    			 this.pageShow =this.pageShow + 1;
+    			 this.buscarFeaturePantalla();
+			}
     	 },
     	 previousPage:function(){
-    		 console.log('previousPage'); 
+    		 if ((this.numeroPaginas - 1) < 1) {
+    			 this.pageShow =this.pageShow - 1;
+    			 this.buscarFeaturePantalla();
+			}
     	 },
-    	    	
-    	
+    	 showDetalleFeature:function(feature){
+    		 console.log("featureId: "+feature.featureId);
+    		 this.buscarDetalleFeature(feature.featureId);
+    		 this.showViewA = !this.showViewA;
+    		 this.titleDetalle= "Detalle Feature" +" "+feature.nombre ;
+    	 },
+    	 retunPageFeature:function(){
+    		 this.showViewA = !this.showViewA;
+    	 }
     }
-    
-    
 
 });
 

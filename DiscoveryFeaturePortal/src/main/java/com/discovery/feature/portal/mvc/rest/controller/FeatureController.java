@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.discovery.feature.portal.mvc.dao.impl.FeatureDaoImpl;
+import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.google.gson.Gson;
@@ -37,10 +38,19 @@ public class FeatureController {
 	
 	@RequestMapping(value = "/buscarPantallas/{pagesize}/{pagenumber}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public @ResponseBody String findAllPantallas(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber) {
-		logger.info("ejecutando metodo buscarTodos");
+		logger.info("ejecutando metodo findAllPantallas");
 		List<BuscarFeatureType> lista = featureDao.buscarFeaturePantalla(pagesize,pageNumber);
 		String json = new Gson().toJson(lista);
 		return json;
 	}
+	
+	@RequestMapping(value = "/buscarDetallefeature/{featureId}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findDetailsFeature(@PathVariable("featureId") Long featureId) {
+		logger.info("ejecutando metodo findDetailsFeature");
+		BuscarDetalleFeatureType detalle = featureDao.buscarDetalleFeature(featureId);
+		String json = new Gson().toJson(detalle);
+		return json;
+	}
+
 
 }

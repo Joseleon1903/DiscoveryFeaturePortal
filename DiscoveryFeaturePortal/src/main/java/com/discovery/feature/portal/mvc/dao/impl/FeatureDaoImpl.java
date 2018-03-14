@@ -13,6 +13,7 @@ import com.discovery.feature.portal.mapping.FeatureMapping;
 import com.discovery.feature.portal.mvc.dao.FeatureDao;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
+import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 
@@ -34,6 +35,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 
 	@Override
 	public List<BuscarFeatureType> buscarFeaturePantalla(int pageSize, int pageNumber) {
+		logger.info("Entrando en el metodo buscarFeaturePantalla..");
 		String countQ = "Select count (f.featureId) from FeatureTab f";
 		Query countQuery = entityManager.createQuery(countQ);
 		Long countResults = (Long) countQuery.getSingleResult();
@@ -43,8 +45,17 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		Query selectQuery = entityManager.createQuery("From FeatureTab");
 		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
 		selectQuery.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
 		List<FeatureTab> lastPage = selectQuery.getResultList();
 		return FeatureMapping.toListBuscarBuscarFeatureType(lastPage);
+	}
+
+	@Override
+	public BuscarDetalleFeatureType buscarDetalleFeature(long featureId) {
+		logger.info("Entrando en el metodo buscarDetalleFeature..");
+		logger.info("featureId: "+featureId);
+		FeatureTab entity =  buscarEntityPorId(FeatureTab.class, featureId);		
+		return FeatureMapping.toBuscarDetalleFeatureType(entity);
 	}
 
 }
