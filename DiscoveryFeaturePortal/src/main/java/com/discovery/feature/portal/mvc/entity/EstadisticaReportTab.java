@@ -82,8 +82,6 @@ public class EstadisticaReportTab {
 	
 	/**
 	 * Query de la entidad
-	 * 
-	 * @author Jose Eduardo
 	 *
 	 */
 	public static interface NameQuery{
