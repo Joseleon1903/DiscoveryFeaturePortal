@@ -1,5 +1,7 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 		 @NamedQuery(name="EstadisticaReportTab.BuscarTodos", query="SELECT e FROM EstadisticaReportTab e") ,
 		 @NamedQuery(name="EstadisticaReportTab.BuscarPorId", query="SELECT e FROM EstadisticaReportTab e WHERE e.estadisticaReportId = :estadisticaReportId")
 })
-public class EstadisticaReportTab {
+public class EstadisticaReportTab implements Serializable {
 	
 	private long estadisticaReportId;
 	private int contadorPantalla;

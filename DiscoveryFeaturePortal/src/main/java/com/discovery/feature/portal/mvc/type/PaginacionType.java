@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class PaginacionType implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3895019041005238018L;
+	
 	private Integer registrosRestantes;
 	private Integer indexPage;
 

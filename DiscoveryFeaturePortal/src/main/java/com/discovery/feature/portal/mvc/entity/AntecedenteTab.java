@@ -1,5 +1,7 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 		 @NamedQuery(name="AntecedentesTab.BuscarTodos", query="SELECT a FROM AntecedenteTab a") ,
 		 @NamedQuery(name="AntecedentesTab.BuscarPorId", query="SELECT a FROM AntecedenteTab a WHERE a.antecedenteId = :antecedenteId")
 })
-public class AntecedenteTab {
+public class AntecedenteTab implements Serializable {
 	
 	private long antecedenteId;
 	private String contenido;
