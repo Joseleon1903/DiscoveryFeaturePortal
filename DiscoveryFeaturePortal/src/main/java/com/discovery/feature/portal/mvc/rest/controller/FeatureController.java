@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.discovery.feature.portal.mvc.dao.impl.FeatureDaoImpl;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
+import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
 import com.google.gson.Gson;

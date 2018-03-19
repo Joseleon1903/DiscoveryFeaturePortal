@@ -31,6 +31,7 @@ public class FeatureTab implements Serializable {
 	
 	private List<AntecedenteTab> antecedentes;
 	private List<EscenarioTab> escenarios;
+	private List<TagsTab> tags; 
 
 	public FeatureTab() {
 		// TODO Auto-generated constructor stub
@@ -96,6 +97,18 @@ public class FeatureTab implements Serializable {
 
 	public void setAntecedentes(List<AntecedenteTab> antecedentes) {
 		this.antecedentes = antecedentes;
+	}
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "TAGS_FEATURE",
+	joinColumns = { @JoinColumn(name = "FEATURE_ID") },
+	inverseJoinColumns = { @JoinColumn(name = "TAG_ID") })
+	public List<TagsTab> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<TagsTab> tags) {
+		this.tags = tags;
 	}
 
 	@Override

@@ -17,6 +17,11 @@ import javax.persistence.Table;
 		@NamedQuery(name = "TagsTab.BuscarPorId", query = "SELECT t FROM TagsTab t WHERE t.tagsTabId = :tagsTabId") })
 public class TagsTab implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2705255130932936248L;
+	
 	private Long tagsTabId;
 	private String name;
 

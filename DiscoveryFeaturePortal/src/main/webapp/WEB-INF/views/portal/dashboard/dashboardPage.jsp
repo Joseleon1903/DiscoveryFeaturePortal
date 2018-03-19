@@ -20,6 +20,11 @@
     <!-- Custom Fonts -->
     <link href="<c:url value="/static/resources/assets/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 </head>
+<!-- jQuery -->
+<script src="<c:url value="/static/resources/assets/jquery/jquery.min.js"/>" ></script>
+<!-- jChats -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+   
 <!-- custom vue online -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
@@ -42,8 +47,12 @@
                     <!-- /.col-lg-12 -->
                     
                       <!--  importando resumen  -->
-                    <%@ include file="resumen-row.html" %>
+                      <%@ include file="resumen-row.html" %>
                       <!-- // importando resumen  end-->
+                      
+                     <!--  importando circulo con estadistica  --> 
+                     <%@ include file="circle-statics-row.html" %>
+                     <!-- // importando circulo con estadistica  --> 
                     
                 </div>
                 <!-- /.row -->
@@ -53,8 +62,7 @@
         <!-- /#page-wrapper -->
       
 	</div>
-   <!-- jQuery -->
-    <script src="<c:url value="/static/resources/assets/jquery/jquery.min.js"/>" ></script>
+	
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<c:url value="/static/resources/assets/bootstrap/js/bootstrap.min.js"/>"></script>
