@@ -67,4 +67,26 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		return FeatureMapping.toBuscarDetalleFeatureType(entity);
 	}
 
+	@Override
+	public List<BuscarFeatureType> buscarFeatureParametrizado(int pageSize, int pageNumber, String nombre) {
+		logger.info("Entrando en el metodo buscarFeaturePantalla..");
+		String countQ = "select count (f.featureId) from FeatureTab f where f.nombre like :nombre or f.caracteristica like :caracteristica";
+		Query countQuery = entityManager.createQuery(countQ);
+		countQuery.setParameter("nombre", nombre);
+		countQuery.setParameter("caracteristica", nombre);
+		Long countResults = (Long) countQuery.getSingleResult();
+		logger.info("countResults: " + countResults);
+		int totalPageNumber = (int) (Math.ceil(countResults / pageSize));
+		logger.info("paginas totales: " + totalPageNumber);
+		Query selectQuery = entityManager.createQuery("select f from FeatureTab f where f.nombre like :nombre or f.caracteristica like :caracteristica");
+		selectQuery.setParameter("nombre", nombre);
+		selectQuery.setParameter("caracteristica", nombre);
+		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
+		selectQuery.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<FeatureTab> lastPage = selectQuery.getResultList();
+		logger.info("result: "+lastPage);
+		return FeatureMapping.toListBuscarBuscarFeatureType(lastPage);		
+	}
+
 }

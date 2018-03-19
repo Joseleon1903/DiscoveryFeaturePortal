@@ -1,5 +1,6 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.persistence.TemporalType;
 		 @NamedQuery(name="Usuario.BuscarPorId", query="SELECT u FROM Usuario u WHERE u.usuarioId = :usuarioId"),
 		 @NamedQuery(name= "Usuario.BuscarPorCodigoUsuario", query= "SELECT u FROM Usuario u WHERE u.codigoUsuario = :codigoUsuario ")
 })
-public class Usuario {
+public class Usuario implements Serializable{
 	
 	private Long usuarioId;
 	private String codigoUsuario;

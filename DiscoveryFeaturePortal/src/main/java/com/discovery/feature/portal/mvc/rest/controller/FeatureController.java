@@ -52,5 +52,13 @@ public class FeatureController {
 		return json;
 	}
 
+	@RequestMapping(value = "/buscarfeature/{pagesize}/{pagenumber}/{testo}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findDetailsFeature(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber, @PathVariable("testo") String testo) {
+		logger.info("ejecutando metodo findDetailsFeature");
+		List<BuscarFeatureType> lista = featureDao.buscarFeatureParametrizado(pagesize,pageNumber,testo);
+		String json = new Gson().toJson(lista);
+		return json;
+	}
+
 
 }
