@@ -16,6 +16,7 @@ public class ElementsType implements Serializable {
     private String type;
     private String keyword;
     private StepsType[] steps;
+    private ExampleType examples[];
     
 	public ElementsType(int line, String name, String description, String type, String keyword, StepsType[] steps) {
 		super();
@@ -74,11 +75,21 @@ public class ElementsType implements Serializable {
 	public void setSteps(StepsType[] steps) {
 		this.steps = steps;
 	}
+	
+
+	public ExampleType[] getExamples() {
+		return examples;
+	}
+
+	public void setExamples(ExampleType[] examples) {
+		this.examples = examples;
+	}
 
 	@Override
 	public String toString() {
 		return "ElementsType [line=" + line + ", name=" + name + ", description=" + description + ", type=" + type
-				+ ", keyword=" + keyword + ", steps=" + Arrays.toString(steps) + "]";
+				+ ", keyword=" + keyword + ", steps=" + Arrays.toString(steps) + ", examples="
+				+ Arrays.toString(examples) + "]";
 	}
-    
+
 }
