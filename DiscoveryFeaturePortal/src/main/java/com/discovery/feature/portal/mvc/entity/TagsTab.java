@@ -12,42 +12,31 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Tags_Tab")
-@NamedQueries({ @NamedQuery(name = "TagsTab.BuscarTodos", query = "SELECT t FROM TagsTab t"),
-		@NamedQuery(name = "TagsTab.BuscarPorId", query = "SELECT t FROM TagsTab t WHERE t.tagsTabId = :tagsTabId") })
+@Table(name="Tags_Tab")
+@NamedQueries({
+		 @NamedQuery(name="TagsTab.BuscarTodos", query="SELECT t FROM TagsTab t") ,
+		 @NamedQuery(name="TagsTab.BuscarPorId", query="SELECT t FROM TagsTab t WHERE t.tagId = :tagId")
+})
 public class TagsTab implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2705255130932936248L;
 	
-	private Long tagsTabId;
+	private Long tagId;
 	private String name;
 
 	public TagsTab() {
-		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public TagsTab(Long tagsTabId, String name) {
-		super();
-		this.tagsTabId = tagsTabId;
-		this.name = name;
+	@SequenceGenerator(name="Tags_Gen", sequenceName="Tags_Seq")
+	@Id @GeneratedValue(generator="Tags_Gen")
+    @Column(name="TAG_ID", nullable= false)
+	public Long getTagId() {
+		return tagId;
 	}
 
-	@SequenceGenerator(name = "Tags_Gen", sequenceName = "Tags_Seq")
-	@Id
-	@GeneratedValue(generator = "Tags_Gen")
-	@Column(name = "TAG_ID", nullable = false)
-	public Long getTagsTabId() {
-		return tagsTabId;
+	public void setTagId(Long tagId) {
+		tagId = tagId;
 	}
 
-	public void setTagsTabId(Long tagsTabId) {
-		tagsTabId = tagsTabId;
-	}
-
-	@Column(name = "NAME", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -55,10 +44,7 @@ public class TagsTab implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	@Override
-	public String toString() {
-		return "TagsTab [tagsTabId=" + tagsTabId + ", name=" + name + "]";
-	}
+	
+	
 
 }

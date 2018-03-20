@@ -16,7 +16,7 @@ public class ElementsType implements Serializable {
     private String type;
     private String keyword;
     private StepsType[] steps;
-    private ExampleType examples[];
+    private ExampleType[] examples;
     
 	public ElementsType(int line, String name, String description, String type, String keyword, StepsType[] steps) {
 		super();
