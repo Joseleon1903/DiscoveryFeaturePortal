@@ -19,6 +19,11 @@ import javax.persistence.Table;
 })
 public class StepsTab implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4337071237505088972L;
+	
 	private Long stepId;
     private String name;
     private String keyword;

@@ -19,6 +19,11 @@ import javax.persistence.Table;
 })
 public class TagsTab implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2652479020580756991L;
+	
 	private Long tagId;
 	private String name;
 
@@ -34,7 +39,7 @@ public class TagsTab implements Serializable{
 	}
 
 	public void setTagId(Long tagId) {
-		tagId = tagId;
+		this.tagId = tagId;
 	}
 
 	public String getName() {

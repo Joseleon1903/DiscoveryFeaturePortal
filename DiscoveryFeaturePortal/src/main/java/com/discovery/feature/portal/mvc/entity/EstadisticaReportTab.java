@@ -19,6 +19,11 @@ import javax.persistence.Table;
 })
 public class EstadisticaReportTab implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1848553452580498225L;
+	
 	private long estadisticaReportId;
 	private int contadorPantalla;
 	private int contadorFlujo;

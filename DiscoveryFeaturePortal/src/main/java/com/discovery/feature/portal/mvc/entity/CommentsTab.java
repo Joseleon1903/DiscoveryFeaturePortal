@@ -1,5 +1,7 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,14 @@ import javax.persistence.Table;
 @Table(name="Comments_Tab")
 @NamedQueries({
 		 @NamedQuery(name="CommentsTab.BuscarTodos", query="SELECT c FROM CommentsTab c") ,
-		 @NamedQuery(name="CommentsTab.BuscarPorId", query="SELECT c FROM CommentsTab c WHERE c.commentId = :CommentId")
-})public class CommentsTab {
+		 @NamedQuery(name="CommentsTab.BuscarPorId", query="SELECT c FROM CommentsTab c WHERE c.commentId = :commentId")
+})
+public class CommentsTab implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7906686523783369896L;
 	
 	private Long commentId;
 	private String value;
@@ -31,7 +39,7 @@ import javax.persistence.Table;
 	}
 
 	public void setCommentId(Long commentId) {
-		commentId = commentId;
+		this.commentId = commentId;
 	}
 
 	public String getValue() {
