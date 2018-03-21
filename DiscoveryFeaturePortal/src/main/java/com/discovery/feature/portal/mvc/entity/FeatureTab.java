@@ -125,8 +125,8 @@ public class FeatureTab {
 	 *
 	 */
 	public static interface NameQuery {
-		String FIND_ALL = "EstadisticaReportTab.BuscarTodos";
-		String FIND_BY_ID = "EstadisticaReportTab.BuscarPorId";
+		String FIND_ALL = "FeatureTab.BuscarTodos";
+		String FIND_BY_ID = "FeatureTab.BuscarPorId";
 	}
 
 }

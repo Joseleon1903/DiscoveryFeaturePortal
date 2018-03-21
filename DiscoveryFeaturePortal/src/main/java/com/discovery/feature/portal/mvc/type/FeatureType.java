@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.discovery.feature.portal.mapping.GenericMapping;
 import com.discovery.feature.portal.mvc.commons.interfaces.BuscableType;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
 
@@ -71,7 +72,7 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	public FeatureType toType(FeatureTab entity) {
 		this.nombre = entity.getName();
 		this.featureId = entity.getFeatureId();
-		this.idioma = "ES";
+		this.idioma = GenericMapping.buscarIdiomaEnComments(entity.getComments());
 		this.caracteristica = entity.getDescription();
 		return this;
 	}

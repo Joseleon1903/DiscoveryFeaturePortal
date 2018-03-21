@@ -38,7 +38,6 @@
 									<th style="width: 50px;">Idioma</th>
 									<th style="width: 80px;">Nombre</th>
 									<th style="width: 180px;">Caracteristica</th>
-									<th style="width: 50px;">Fecha ultima actualización</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -47,7 +46,6 @@
 								<td class="">{{feature.idioma}}</td>
 								<td class="">{{feature.nombre}}</td>
 								<td class="">{{feature.caracteristica}}</td>
-								<td class="">{{feature.fechaUltimaActualizacion}}</td>
 							</tr>
 							</tbody>
 						</table>
@@ -114,7 +112,7 @@
 new Vue({
 	el: '#view-pantalla',
 	data : {
-    	feature: { featureId: 0,nombre:"", idioma: "", fechaUltimaActualizacion: "", caracteristica:""},
+    	feature: { featureId: 0,nombre:"", idioma: "", caracteristica:""},
     	featureList: [],
     	detalleList: [],
     	numeroPaginas: 1,
