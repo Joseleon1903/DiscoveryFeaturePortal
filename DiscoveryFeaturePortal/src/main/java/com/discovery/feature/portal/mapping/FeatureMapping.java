@@ -11,16 +11,16 @@ public final class FeatureMapping {
 
 	private FeatureMapping() {}
 
-	public static List<BuscarFeatureType> toListBuscarBuscarFeatureType(List<FeatureTab> listadoEntity) {
+	public static List<BuscarFeatureType> toListBuscarFeatureType(List<FeatureTab> listadoEntity) {
 		List<BuscarFeatureType> listaSalida = new ArrayList<>();
 		BuscarFeatureType outType = null;
 		for (FeatureTab index : listadoEntity) {
 			outType = new BuscarFeatureType();
 			outType.setFeatureId(index.getFeatureId());
-//			outType.setIdioma(index.getIdioma());
-//			outType.setCaracteristica(index.getCaracteristica());
-//			outType.setFechaUltimaActualizacion(new Date());
-//			outType.setNombre(index.getNombre());
+			outType.setIdioma(GenericMapping.buscarIdiomaEnComments(index.getComments()));
+			outType.setCaracteristica(index.getDescription());
+			outType.setNombre(index.getName());
+			outType.setTags(index.getComments().toString());
 			listaSalida.add(outType);
 		}
 		return listaSalida;

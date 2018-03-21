@@ -49,7 +49,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		selectQuery.setMaxResults(pageSize);
 		@SuppressWarnings("unchecked")
 		List<FeatureTab> lastPage = selectQuery.getResultList();
-		List<BuscarFeatureType> listaSalida = FeatureMapping.toListBuscarBuscarFeatureType(lastPage);
+		List<BuscarFeatureType> listaSalida = FeatureMapping.toListBuscarFeatureType(lastPage);
 		ResponsePaginationType response = new ResponsePaginationType();
 		response.getTypeList().addAll(listaSalida);
 		PaginacionType pagination = new PaginacionType();
@@ -86,7 +86,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		@SuppressWarnings("unchecked")
 		List<FeatureTab> lastPage = selectQuery.getResultList();
 		logger.info("result: "+lastPage);
-		return FeatureMapping.toListBuscarBuscarFeatureType(lastPage);		
+		return FeatureMapping.toListBuscarFeatureType(lastPage);		
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.discovery.feature.portal.mvc.type;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class BuscarFeatureType implements Serializable{
 	
@@ -9,7 +8,7 @@ public class BuscarFeatureType implements Serializable{
 	private String nombre;
 	private String idioma;
 	private String caracteristica;
-	private Date fechaUltimaActualizacion;
+	private String Tags;
 
 	public BuscarFeatureType() {
 	}
@@ -45,19 +44,19 @@ public class BuscarFeatureType implements Serializable{
 	public void setCaracteristica(String caracteristica) {
 		this.caracteristica = caracteristica;
 	}
-
-	public Date getFechaUltimaActualizacion() {
-		return fechaUltimaActualizacion;
+	
+	public String getTags() {
+		return Tags;
 	}
 
-	public void setFechaUltimaActualizacion(Date fechaUltimaActualizacion) {
-		this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+	public void setTags(String tags) {
+		Tags = tags;
 	}
 
 	@Override
 	public String toString() {
 		return "BuscarFeatureType [featureId=" + featureId + ", nombre=" + nombre + ", idioma=" + idioma
-				+ ", caracteristica=" + caracteristica + ", fechaUltimaActualizacion=" + fechaUltimaActualizacion + "]";
+				+ ", caracteristica=" + caracteristica + ", Tags=" + Tags + "]";
 	}
-
+		
 }

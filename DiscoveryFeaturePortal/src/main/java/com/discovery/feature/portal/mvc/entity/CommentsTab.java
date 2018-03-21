@@ -52,7 +52,7 @@ public class CommentsTab implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommentsTab [CommentId=" + commentId + ", value=" + value + "]";
+		return value + ",";
 	}
 
 }
