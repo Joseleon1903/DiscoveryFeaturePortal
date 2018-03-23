@@ -27,7 +27,7 @@ public class StepsTab implements Serializable{
 	private Long stepId;
     private String name;
     private String keyword;
-
+  
 	public StepsTab() {
 		// TODO Auto-generated constructor stub
 	}
@@ -58,7 +58,5 @@ public class StepsTab implements Serializable{
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
-	
 
 }

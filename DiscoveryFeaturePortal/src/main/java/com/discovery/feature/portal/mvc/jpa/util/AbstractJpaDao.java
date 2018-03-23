@@ -10,13 +10,18 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.sql.DataSource;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractJpaDao<ID, E> {
 	
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	protected Class<E> entityClass;
 	protected E entity;
@@ -142,6 +147,13 @@ public abstract class AbstractJpaDao<ID, E> {
 	 */
 	public EntityManager getEntityManager() {
 		return entityManager;
+	}
+	
+	/**
+	 * @return the DataSource
+	 */
+	public DataSource getDataSource() {
+		return dataSource;
 	}
 	
 

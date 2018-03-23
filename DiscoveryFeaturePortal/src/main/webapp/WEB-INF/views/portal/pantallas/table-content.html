@@ -80,22 +80,29 @@
 </transition>
 
 <transition name="slide-fade">
-<div class="col-lg-4" v-if="!showViewA">
+<div class="col-lg-4" v-if="!showViewA" style="width: 80%;">
       <div class="panel panel-default">
           <div class="panel-heading"><h3><b>{{titleDetalle}}</b></h3></div>
           <div class="panel-body">
           <h4><b>Antecedentes</b></h4>
            <blockquote>
                <ul>
-               <li v-for="ant in antecedentes">{{ant.contenido}}</li>
+               <li v-for="ant in antecedentes">{{ant}}</li>
                </ul>
            </blockquote>
            </br>
            <h4><b>Escenarios</b></h4>
-           <blockquote>
-               <ul>
-               <li v-for="esc in escenarios">{{esc.contenido}}</li>
-               </ul>
+<!--            <blockquote> -->
+<!--                <ul> -->
+<!--                <li v-for="esc in escenarios">{{esc.contenido}}</li> -->
+<!--                </ul> -->
+<!--            </blockquote> -->
+           
+           <blockquote v-for="escenario in escenarios">
+                <h4>{{escenario.name}}</h4>
+	               <ul>
+	                  <li v-for="st in escenario.steps"> {{st}}</li>
+	               </ul>
            </blockquote>
           </div>
           <div class="panel-footer" style="float: right;">

@@ -1,5 +1,11 @@
 package com.discovery.feature.portal.mvc.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -15,9 +21,11 @@ import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
+import com.discovery.feature.portal.mvc.type.EscenarioType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.PaginacionType;
 import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
+import com.discovery.feature.query.ConstantQuery;
 
 @Repository
 public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements FeatureDao {
@@ -61,10 +69,38 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 
 	@Override
 	public BuscarDetalleFeatureType buscarDetalleFeature(long featureId) {
-		logger.info("Entrando en el metodo buscarDetalleFeature..");
-		logger.info("featureId: "+featureId);
-		FeatureTab entity =  buscarEntityPorId(FeatureTab.class, featureId);		
-		return FeatureMapping.toBuscarDetalleFeatureType(entity);
+		Connection connexion = null;
+		PreparedStatement stmt = null;
+		BuscarDetalleFeatureType detalle = new BuscarDetalleFeatureType();
+		try {
+			connexion = getDataSource().getConnection();
+			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_FEAT_PANTALLA_ANTECEDENTES);
+			stmt.setLong(1, featureId);
+			stmt.setString(2, "Antecedentes");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				detalle.getAntecedentes().add(rs.getString("KEYWORD") + " "+ rs.getString("DESCRIPCION"));
+			}
+			//buscando escenarios
+			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_FEAT_PANTALLA_ESCENARIOS);
+			stmt.setLong(1, featureId);
+			stmt.setString(2, "Escenario");
+			rs = stmt.executeQuery();
+			HashMap<String,List<String>> mapList= new HashMap<>();
+			while (rs.next()) {
+				if (!mapList.containsKey(rs.getString("NAME"))) {
+					mapList.put(rs.getString("NAME"),new ArrayList<>());
+				}
+				List<String> array = mapList.get(rs.getString("NAME"));
+				array.add(rs.getString("KEYWORD") + " "+ rs.getString("DESCRIPCION"));
+				mapList.put(rs.getString("NAME"),array);
+			}
+			logger.info("result "+mapList);
+			detalle.setEscenarios(FeatureMapping.castEscenario(mapList));
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return detalle;
 	}
 
 	@Override
