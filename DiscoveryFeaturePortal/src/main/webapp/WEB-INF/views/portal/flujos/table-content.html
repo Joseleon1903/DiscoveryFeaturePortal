@@ -1,0 +1,142 @@
+<div class="col-lg-12" id="view-flujos">
+
+<transition name="slide-fade">
+	<div class="panel panel-default" v-if="showViewA">
+		<div class="panel-heading">DataTables Advanced Tables</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<div id="dataTables-example_wrapper"
+				class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="dataTables_length" id="dataTables-example_length" >
+							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"  ><option
+										value="10">10</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="100">100</option></select> entries
+							</label>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div id="dataTables-example_filter" class="dataTables_filter" style="float: right;">
+							<label>Search:<input type="search"
+								class="form-control input-sm" placeholder=""
+								aria-controls="dataTables-example"></label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<table width="100%"
+							class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+							id="dataTables-example" role="grid"
+							aria-describedby="dataTables-example_info" style="width: 100%;">
+							<thead>
+								<tr role="row">
+									<th style="width: 50px;">Identificador</th>
+									<th style="width: 50px;">Idioma</th>
+									<th style="width: 80px;">Nombre</th>
+									<th style="width: 180px;">Caracteristica</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="gradeA odd" role="row"  >
+								<td class=""></td>
+								<td class=""></td>
+								<td class=""></td>
+								<td class=""></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="dataTables_info" id="dataTables-example_info"
+							role="status" aria-live="polite">Showing 20 to 20 of 30
+							entries</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="dataTables_paginate paging_simple_numbers"
+							id="dataTables-example_paginate">
+							<ul class="pagination">
+								<li class="paginate_button previous"
+									aria-controls="dataTables-example" tabindex="0"
+									id="dataTables-example_previous"><a href="#" @click="previousPage()">Previous</a></li>
+								<li class="paginate_button active"
+									aria-controls="dataTables-example" tabindex="0" v-for="num in paginasTotal"><a @click="cambioPagina(num)">{{num}}</a></li>
+								<li class="paginate_button next"
+									aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a @click="nextPage()">Next</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.panel-body -->
+	</div>
+	<!-- /.panel -->
+</transition>
+
+
+</div>
+<script>
+
+             
+new Vue({
+	el: '#view-flujos',
+	data : {
+    	feature: { featureId: 0,nombre:"", idioma: "", caracteristica:""},
+    	featureList: [],
+    	detalleList: [],
+    	numeroPaginas: 1,
+    	pageShow: 10,
+    	showViewA:true,
+    	titleDetalle: '',
+    	antecedentes: [],
+    	escenarios: [],
+    	totalRegistros: 0,
+    	numberPageSelected: 1,
+    },
+	created: function(){
+		console.log('iniciando vue pantalla.');
+		this.buscarFeaturePantalla(this.pageShow,this.numeroPaginas);
+    },
+    methods:{
+
+    	 cambioPagina:function(numeroPagina){
+    		this.buscarFeaturePantalla(this.pageShow, numeroPagina);
+    	 },
+    	 nextPage:function(){
+    		 if ((this.numberPageSelected + 1) <= this.numeroPaginas) {
+    			 this.numberPageSelected =this.numberPageSelected + 1;
+    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
+			}
+    	 },
+    	 previousPage:function(){
+    		 if ((this.numberPageSelected - 1) >= 1) {
+    			 this.numberPageSelected =this.numberPageSelected - 1;
+    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
+			}
+    	 },
+    	 showDetalleFeature:function(feature){
+    		 console.log("featureId: "+feature.featureId);
+    		 this.buscarDetalleFeature(feature.featureId);
+    		 this.showViewA = !this.showViewA;
+    		 this.titleDetalle= "Detalle Feature" +" "+feature.nombre ;
+    	 },
+    	 retunPageFeature:function(){
+    		 this.showViewA = !this.showViewA;
+    	 }
+    },
+    computed:{
+    	paginasTotal: function () {
+    		var data = this.numeroPaginas;
+    		return data;
+    	},
+    }
+
+});
+
+</script>
