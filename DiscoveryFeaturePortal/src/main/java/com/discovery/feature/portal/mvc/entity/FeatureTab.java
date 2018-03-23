@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,6 +28,7 @@ public class FeatureTab {
 	private String id;
 	private String keyword;
 	private String uri;
+	private TypeFeatureTab typeFeature;
 	private List<TagsTab> tags;
 	private List<CommentsTab> comments;
 	private List<ElementsTab> elements;
@@ -96,6 +98,16 @@ public class FeatureTab {
 
 	public void setUri(String uri) {
 		this.uri = uri;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="TYPE_FEATURE_ID")
+	public TypeFeatureTab getTypeFeature() {
+		return typeFeature;
+	}
+
+	public void setTypeFeature(TypeFeatureTab typeFeature) {
+		this.typeFeature = typeFeature;
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL)

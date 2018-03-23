@@ -28,6 +28,26 @@
       <%@ include file="../template/header.html" %>
       <!-- 	menu de navegación 	end -->
       
+       <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Feature de Flujos</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    
+                                          <!--  importando resumen  -->
+                    <%@ include file="table-content.html" %>
+                      <!-- // importando resumen  end-->
+                   
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+      
+      
       
 	</div>
    <!-- jQuery -->

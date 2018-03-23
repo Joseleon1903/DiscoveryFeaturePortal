@@ -6,19 +6,19 @@
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="primary" transaction-type="RESOURCE_LOCAL">
 	
-		<jta-data-source>java:jboss/OracleDataSource</jta-data-source>
+<!-- 		<jta-data-source>java:jboss/OracleDataSource</jta-data-source> -->
 		
 		<class>com.discovery.feature.portal.mvc.entity.FeatureTab</class>
         <class>com.discovery.feature.portal.mvc.entity.EstadisticaReportTab</class>
         <class>com.discovery.feature.portal.mvc.entity.TagsTab</class>
         <class>com.discovery.feature.portal.mvc.entity.CommentsTab</class>
         <class>com.discovery.feature.portal.mvc.entity.ElementsTab</class>
-        <class>com.discovery.feature.portal.mvc.entity.StepsTab</class>        
+        <class>com.discovery.feature.portal.mvc.entity.StepsTab</class>  
         <class>com.discovery.feature.portal.mvc.entity.ExampleTab</class>
-           
+        <class>com.discovery.feature.portal.mvc.entity.TypeFeatureTab</class>
+        
 		<properties>
 			<!-- Properties for Hibernate -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
             <property name="org.hibernate.dialect.Dialect" value="org.hibernate.dialect.Oracle11gDialect"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.use_sql_comments" value="true"/>

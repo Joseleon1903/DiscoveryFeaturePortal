@@ -21,7 +21,6 @@ import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
-import com.discovery.feature.portal.mvc.type.EscenarioType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.PaginacionType;
 import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
@@ -95,7 +94,6 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 				array.add(rs.getString("KEYWORD") + " "+ rs.getString("DESCRIPCION"));
 				mapList.put(rs.getString("NAME"),array);
 			}
-			logger.info("result "+mapList);
 			detalle.setEscenarios(FeatureMapping.castEscenario(mapList));
 		}catch (SQLException e) {
 			e.printStackTrace();
