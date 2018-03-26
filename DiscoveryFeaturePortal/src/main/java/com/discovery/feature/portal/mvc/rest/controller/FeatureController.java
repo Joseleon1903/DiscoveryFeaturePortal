@@ -61,5 +61,13 @@ public class FeatureController {
 		return json;
 	}
 
+	@RequestMapping(value = "/buscarFlujos/{pagesize}/{pagenumber}/{featureType}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findAllFlujos(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber, @PathVariable("featureType") Integer featureType) {
+		logger.info("ejecutando metodo findAllFlujos");
+		ResponsePaginationType response = featureDao.buscarFeatureFlujos(pagesize,pageNumber, featureType);
+		String json = new Gson().toJson(response);
+		return json;
+	}
+
 
 }

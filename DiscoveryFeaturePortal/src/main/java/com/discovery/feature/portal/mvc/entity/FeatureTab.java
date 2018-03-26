@@ -132,6 +132,17 @@ public class FeatureTab implements Serializable{
 	public void setElements(List<ElementsTab> elements) {
 		this.elements = elements;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "FeatureTab [featureId=" + featureId + ", name=" + name + ", description=" + description + ", id=" + id
+				+ ", keyword=" + keyword + ", uri=" + uri + ", typeFeature=" + typeFeature + ", tags=" + tags
+				+ ", comments=" + comments + ", elements=" + elements + "]";
+	}
+
+
 
 	/**
 	 * Query de la entidad

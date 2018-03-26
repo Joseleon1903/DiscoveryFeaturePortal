@@ -123,4 +123,26 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		return FeatureMapping.toListBuscarFeatureType(lastPage);		
 	}
 
+	@Override
+	public ResponsePaginationType buscarFeatureFlujos(int pageSize, int pageNumber, int featureType) {
+		logger.info("Entrando en el metodo buscarFeatureFlujos..");
+		String countQ = "Select count (f.featureId) from FeatureTab f WHERE typeFeature.typeFeatureId = "+ featureType;
+		Query countQuery = entityManager.createQuery(countQ);
+		Long countResults = (Long) countQuery.getSingleResult();
+		int totalPageNumber = (int) (Math.ceil(countResults / pageSize));
+		Query selectQuery = entityManager.createQuery("From FeatureTab WHERE typeFeature.typeFeatureId = "+ featureType);
+		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
+		selectQuery.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<FeatureTab> lastPage = selectQuery.getResultList();
+		List<BuscarFeatureType> listaSalida = FeatureMapping.toListBuscarFeatureType(lastPage);
+		ResponsePaginationType response = new ResponsePaginationType();
+		response.getTypeList().addAll(listaSalida);
+		PaginacionType pagination = new PaginacionType();
+		pagination.setIndexPage(pageNumber);
+		pagination.setRegistrosRestantes(countResults);
+		response.setPagination(pagination);
+		return response;
+	}
+
 }

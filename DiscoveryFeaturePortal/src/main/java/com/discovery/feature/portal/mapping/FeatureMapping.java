@@ -25,7 +25,7 @@ public final class FeatureMapping {
 			outType.setIdioma(GenericMapping.buscarIdiomaEnComments(index.getComments()));
 			outType.setCaracteristica(index.getDescription());
 			outType.setNombre(index.getName());
-			outType.setTags(index.getComments().toString());
+			outType.setTags(index.getTags().toString());
 			listaSalida.add(outType);
 		}
 		return listaSalida;

@@ -4,11 +4,16 @@ import java.io.Serializable;
 
 public class BuscarFeatureType implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8827995287650874669L;
+	
 	private long featureId;
 	private String nombre;
 	private String idioma;
 	private String caracteristica;
-	private String Tags;
+	private String tags;
 
 	public BuscarFeatureType() {
 	}
@@ -46,17 +51,17 @@ public class BuscarFeatureType implements Serializable{
 	}
 	
 	public String getTags() {
-		return Tags;
+		return tags;
 	}
 
 	public void setTags(String tags) {
-		Tags = tags;
+		this.tags = tags;
 	}
 
 	@Override
 	public String toString() {
 		return "BuscarFeatureType [featureId=" + featureId + ", nombre=" + nombre + ", idioma=" + idioma
-				+ ", caracteristica=" + caracteristica + ", Tags=" + Tags + "]";
+				+ ", caracteristica=" + caracteristica + ", Tags=" + tags + "]";
 	}
 		
 }

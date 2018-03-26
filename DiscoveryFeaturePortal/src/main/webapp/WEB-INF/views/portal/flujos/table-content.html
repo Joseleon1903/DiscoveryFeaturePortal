@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_length" id="dataTables-example_length" >
-							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"  ><option
+							<label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" v-model="pageShow" @change="cambioPagina(1)"><option
 										value="10">10</option>
 									<option value="25">25</option>
 									<option value="50">50</option>
@@ -41,11 +41,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="gradeA odd" role="row"  >
-								<td class=""></td>
-								<td class=""></td>
-								<td class=""></td>
-								<td class=""></td>
+								<tr class="gradeA odd" role="row" v-for="feature in featureList" @dblclick="showDetalleFeature(feature)">
+								<td class="">{{feature.featureId}}</td>
+								<td class="">{{feature.idioma}}</td>
+								<td class="">{{feature.nombre}}</td>
+								<td class="">{{feature.caracteristica}}</td>
 							</tr>
 							</tbody>
 						</table>
@@ -54,7 +54,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_info" id="dataTables-example_info"
-							role="status" aria-live="polite">Showing 20 to 20 of 30
+							role="status" aria-live="polite">Showing {{numberPageSelected}} to {{pageShow}} of {{totalRegistros}}
 							entries</div>
 					</div>
 					<div class="col-sm-6">
@@ -89,42 +89,41 @@ new Vue({
 	data : {
     	feature: { featureId: 0,nombre:"", idioma: "", caracteristica:""},
     	featureList: [],
-    	detalleList: [],
     	numeroPaginas: 1,
     	pageShow: 10,
     	showViewA:true,
     	titleDetalle: '',
-    	antecedentes: [],
-    	escenarios: [],
     	totalRegistros: 0,
     	numberPageSelected: 1,
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
-		this.buscarFeaturePantalla(this.pageShow,this.numeroPaginas);
+		this.buscarFeatureFlujos(this.pageShow,this.numeroPaginas);
     },
     methods:{
-
+    	buscarFeatureFlujos:function(showNumber, pageIndex){
+       		 this.$http.get(URL_BASE+"Feature/buscarFlujos/"+showNumber+"/"+pageIndex+"/"+2).then(response => {
+       	         this.featureList = response.data.typeList;
+       	         this.totalRegistros = response.data.pagination.registrosRestantes;
+       	         this.numeroPaginas = Math.ceil(this.totalRegistros / this.pageShow);
+       	     }, response => {
+       	         console.log('response error : '+response.status);
+        	});     		
+    	},
     	 cambioPagina:function(numeroPagina){
-    		this.buscarFeaturePantalla(this.pageShow, numeroPagina);
+    		this.buscarFeatureFlujos(this.pageShow, numeroPagina);
     	 },
     	 nextPage:function(){
     		 if ((this.numberPageSelected + 1) <= this.numeroPaginas) {
     			 this.numberPageSelected =this.numberPageSelected + 1;
-    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
+    			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
 			}
     	 },
     	 previousPage:function(){
     		 if ((this.numberPageSelected - 1) >= 1) {
     			 this.numberPageSelected =this.numberPageSelected - 1;
-    			 this.buscarFeaturePantalla(this.pageShow,this.numberPageSelected );
+    			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
 			}
-    	 },
-    	 showDetalleFeature:function(feature){
-    		 console.log("featureId: "+feature.featureId);
-    		 this.buscarDetalleFeature(feature.featureId);
-    		 this.showViewA = !this.showViewA;
-    		 this.titleDetalle= "Detalle Feature" +" "+feature.nombre ;
     	 },
     	 retunPageFeature:function(){
     		 this.showViewA = !this.showViewA;
