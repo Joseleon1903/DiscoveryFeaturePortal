@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.discovery.feature.portal.mvc.dao.impl.FeatureDaoImpl;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
+import com.discovery.feature.portal.mvc.type.BuscarDetalleFlujoFeature;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
@@ -68,6 +69,15 @@ public class FeatureController {
 		String json = new Gson().toJson(response);
 		return json;
 	}
+	
+	@RequestMapping(value = "/buscarDetalleFlujos/{featureid}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findDetailFlujos(@PathVariable("featureid") Integer featureid) {
+		logger.info("ejecutando metodo findDetailFlujos");
+		BuscarDetalleFlujoFeature response = featureDao.buscarDetalleFeatureFlujo(featureid);
+		String json = new Gson().toJson(response);
+		return json;
+	}
+
 
 
 }

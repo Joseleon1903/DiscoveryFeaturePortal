@@ -18,15 +18,5 @@ public final class GenericMapping {
 		return idioma;
 	}
 	
-//	public static String CommentsToString(List<CommentsTab> comments) {
-//		String idioma = "";
-//		for (CommentsTab commentsTab : comments) {
-//			if (commentsTab.getValue().contains("language")) {
-//				idioma = commentsTab.getValue();
-//			}
-//		}
-//		return idioma;
-//	}
-
 
 }

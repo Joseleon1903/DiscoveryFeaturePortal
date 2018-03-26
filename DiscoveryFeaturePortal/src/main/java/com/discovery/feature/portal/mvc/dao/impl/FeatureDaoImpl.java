@@ -20,6 +20,7 @@ import com.discovery.feature.portal.mvc.dao.FeatureDao;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
+import com.discovery.feature.portal.mvc.type.BuscarDetalleFlujoFeature;
 import com.discovery.feature.portal.mvc.type.BuscarFeatureType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.PaginacionType;
@@ -143,6 +144,25 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		pagination.setRegistrosRestantes(countResults);
 		response.setPagination(pagination);
 		return response;
+	}
+
+	@Override
+	public BuscarDetalleFlujoFeature buscarDetalleFeatureFlujo(long featureId) {
+		Connection connexion = null;
+		PreparedStatement stmt = null;
+		BuscarDetalleFlujoFeature detalle = new BuscarDetalleFlujoFeature();
+		try {
+			connexion = getDataSource().getConnection();
+			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_FEAT_FLUJO);
+			stmt.setLong(1, featureId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				detalle.getSteps().add(rs.getString("KEYWORD") + " "+ rs.getString("NAME"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return detalle;
 	}
 
 }

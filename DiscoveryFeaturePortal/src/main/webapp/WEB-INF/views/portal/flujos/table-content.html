@@ -84,9 +84,13 @@
       <div class="panel panel-default">
           <div class="panel-heading"><h3><b>{{titleDetalle}}</b></h3></div>
           <div class="panel-body">
-          <h4><b>Escenario</b></h4>
-           
-           
+          <h4><b>Steps Flujo</b></h4>
+            <blockquote>
+               <ul>
+               <li v-for="step in steps">{{step}}</li>
+               </ul>
+           </blockquote>
+           </br>
           </div>
           <div class="panel-footer" style="float: right;">
               <button type="button" class="fa-arrow-circle-left btn" @click="retunPageFeature()">Back</button>
@@ -110,6 +114,7 @@ new Vue({
     	titleDetalle: '',
     	totalRegistros: 0,
     	numberPageSelected: 1,
+    	steps: [],
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
@@ -125,39 +130,46 @@ new Vue({
        	         console.log('response error : '+response.status);
         	});     		
     	},
-    	 cambioPagina:function(numeroPagina){
-    		this.buscarFeatureFlujos(this.pageShow, numeroPagina);
-    	 },
-    	 nextPage:function(){
-    		 if ((this.numberPageSelected + 1) <= this.numeroPaginas) {
-    			 this.numberPageSelected =this.numberPageSelected + 1;
-    			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
-			}
-    	 },
-    	 previousPage:function(){
-    		 if ((this.numberPageSelected - 1) >= 1) {
-    			 this.numberPageSelected =this.numberPageSelected - 1;
-    			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
-			}
-    	 },
-    	 retunPageFeature:function(){
-    		 this.showViewA = !this.showViewA;
-    	 },
-    	 showDetalleFeature:function(feature){
-    		 //this.buscarFeatureFlujos(feature.featureId);
-    		 this.showViewA = !this.showViewA;
-    		 this.titleDetalle= "Detalle Flujo Feature " +" "+feature.nombre ;
-    	 },
-    	 retunPageFeature:function(){
-    		 this.showViewA = !this.showViewA;
-    	 }
-    },
-    computed:{
-    	paginasTotal: function () {
-    		var data = this.numeroPaginas;
-    		return data;
-    	},
-    }
+    	buscarDetalleFlujoFeature: function (featureId) {
+   		 this.$http.get(URL_BASE+"Feature/buscarDetalleFlujos/"+featureId).then(response => {
+   	         this.steps = response.data.steps;
+   	     }, response => {
+   	         console.log('response error : '+response.status);
+   	     }); 
+  	  },
+   	 cambioPagina:function(numeroPagina){
+   		this.buscarFeatureFlujos(this.pageShow, numeroPagina);
+   	 },
+   	 nextPage:function(){
+   		 if ((this.numberPageSelected + 1) <= this.numeroPaginas) {
+   			 this.numberPageSelected =this.numberPageSelected + 1;
+   			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
+		}
+   	 },
+   	 previousPage:function(){
+   		 if ((this.numberPageSelected - 1) >= 1) {
+   			 this.numberPageSelected =this.numberPageSelected - 1;
+   			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
+		}
+   	 },
+   	 retunPageFeature:function(){
+   		 this.showViewA = !this.showViewA;
+   	 },
+   	 showDetalleFeature:function(feature){
+   		 this.buscarDetalleFlujoFeature(feature.featureId);
+   		 this.showViewA = !this.showViewA;
+   		 this.titleDetalle= "Detalle Flujo Feature " +" "+feature.nombre ;
+   	 },
+   	 retunPageFeature:function(){
+   		 this.showViewA = !this.showViewA;
+   	 }
+   },
+   computed:{
+   	paginasTotal: function () {
+   		var data = this.numeroPaginas;
+   		return data;
+   	},
+   }
 
 });
 

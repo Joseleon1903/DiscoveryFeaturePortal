@@ -16,5 +16,12 @@ public class ConstantQuery {
 			"join STEPS_ELEMENT stle ON el.ELEMENT_ID = stle.ELEMENT_ID\r\n" + 
 			"join STEPS_TAB st ON stle.STEP_ID = st.STEP_ID\r\n" + 
 			"where ft.FEATURE_ID = ? AND elm.KEYWORD = ? " ;
+	
+	public static  String BUSCAR_DET_FEAT_FLUJO ="select st.KEYWORD, st.NAME from FEATURE_TAB ft \r\n" + 
+			"join ELEMENTS_FEATURE el ON ft.FEATURE_ID = el.FEATURE_ID\r\n" + 
+			"join ELEMENTS_TAB elm ON el.ELEMENT_ID = elm.ELEMENT_ID\r\n" + 
+			"join STEPS_ELEMENT stle ON el.ELEMENT_ID = stle.ELEMENT_ID  \r\n" + 
+			"join STEPS_TAB st ON stle.STEP_ID = st.STEP_ID\r\n" + 
+			"where ft.FEATURE_ID = ?" ;
 
 }
