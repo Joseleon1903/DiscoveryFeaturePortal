@@ -16,6 +16,7 @@ import org.jboss.logging.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.discovery.feature.portal.mapping.FeatureMapping;
+import com.discovery.feature.portal.mvc.constante.ParametrosCatalogoConstante;
 import com.discovery.feature.portal.mvc.dao.FeatureDao;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
@@ -45,13 +46,13 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 	@Override
 	public ResponsePaginationType buscarFeaturePantalla(int pageSize, int pageNumber) {
 		logger.info("Entrando en el metodo buscarFeaturePantalla..");
-		String countQ = "Select count (f.featureId) from FeatureTab f";
+		String countQ = "Select count (f.featureId) from FeatureTab f WHERE typeFeature.typeFeatureId = "+ ParametrosCatalogoConstante.FeatureType.CONST_PANTALLA;
 		Query countQuery = entityManager.createQuery(countQ);
 		Long countResults = (Long) countQuery.getSingleResult();
 		logger.info("countResults: " + countResults);
 		int totalPageNumber = (int) (Math.ceil(countResults / pageSize));
 		logger.info("paginas totales: " + totalPageNumber);
-		Query selectQuery = entityManager.createQuery("From FeatureTab");
+		Query selectQuery = entityManager.createQuery("From FeatureTab WHERE typeFeature.typeFeatureId = "+ ParametrosCatalogoConstante.FeatureType.CONST_PANTALLA);
 		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
 		selectQuery.setMaxResults(pageSize);
 		@SuppressWarnings("unchecked")
