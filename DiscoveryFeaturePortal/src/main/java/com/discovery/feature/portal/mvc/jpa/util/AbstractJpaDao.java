@@ -10,13 +10,19 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.sql.DataSource;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractJpaDao<ID, E> {
 	
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
+	@Autowired
+	private DataSource dataSource;
+	
 	protected Class<E> entityClass;
 	protected E entity;
 	
@@ -27,7 +33,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	 * Descripcion: Metodo que permite elimninar una entidad por su Id.
 	 * 
 	 * @param id
-	 * @return
+	 * @return 
 	 */
     public E removeById(Class<E> clazz, ID id) throws PersistenceException {
     		
@@ -126,8 +132,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	public void registrarEntity(E entity) throws PersistenceException, EntityExistsException {
 		try {
 			entityManager.persist(entity);
-//			entityManager.flush();
-//			entityManager.getTransaction().commit();
+			entityManager.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			logger.info(e.getMessage());
 			throw new EntityExistsException(e);
@@ -142,6 +147,13 @@ public abstract class AbstractJpaDao<ID, E> {
 	 */
 	public EntityManager getEntityManager() {
 		return entityManager;
+	}
+	
+	/**
+	 * @return the DataSource
+	 */
+	public DataSource getDataSource() {
+		return dataSource;
 	}
 	
 

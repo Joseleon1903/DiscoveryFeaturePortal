@@ -1,67 +1,49 @@
 package com.discovery.feature.portal.mvc.type;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.discovery.feature.portal.mvc.commons.interfaces.BuscableType;
-import com.discovery.feature.portal.mvc.entity.EscenarioTab;
-
-public class EscenarioType implements Serializable, BuscableType<EscenarioType, EscenarioTab>{
+public class EscenarioType implements Serializable{
 	
-	private long escenarioId;
-	private String contenido;
-
-	public EscenarioType() {
-		// TODO Auto-generated constructor stub
-	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7014825913249029677L;
 	
+	private String name;
+	private List<String> steps;
 	
-
-	public EscenarioType(long escenarioId, String contenido) {
+	public EscenarioType() { super(); }
+	
+	public EscenarioType(String name, List<String> steps) {
 		super();
-		this.escenarioId = escenarioId;
-		this.contenido = contenido;
+		this.name = name;
+		this.steps = steps;
 	}
-
-
-
-	public long getEscenarioId() {
-		return escenarioId;
+	
+	public String getName() {
+		return name;
 	}
-
-	public void setEscenarioId(long escenarioId) {
-		this.escenarioId = escenarioId;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getContenido() {
-		return contenido;
+	
+	public List<String> getSteps() {
+		if (steps == null) {
+			steps = new ArrayList<>();
+		}
+		return steps;
 	}
-
-	public void setContenido(String contenido) {
-		this.contenido = contenido;
+	
+	public void setSteps( List<String> steps) {
+		this.steps = steps;
 	}
 
 	@Override
 	public String toString() {
-		return "EscenarioType [escenarioId=" + escenarioId + ", contenido=" + contenido + "]";
-	}
-
-	@Override
-	public EscenarioType toType(EscenarioTab entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EscenarioTab toEntity(EscenarioType type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EscenarioType> toListType(List<EscenarioTab> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return "EscenarioType [name=" + name + ", steps=" + steps + "]";
+	}	
 
 }
