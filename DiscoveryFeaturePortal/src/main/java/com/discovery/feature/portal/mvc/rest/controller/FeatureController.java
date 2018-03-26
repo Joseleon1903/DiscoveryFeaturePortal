@@ -37,10 +37,10 @@ public class FeatureController {
 		return json;
 	}
 	
-	@RequestMapping(value = "/buscarPantallas/{pagesize}/{pagenumber}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public @ResponseBody String findAllPantallas(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber) {
+	@RequestMapping(value = "/buscarPantallas/{pagesize}/{pagenumber}/{featureType}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public @ResponseBody String findAllPantallas(@PathVariable("pagesize") Integer pagesize, @PathVariable("pagenumber") Integer pageNumber, @PathVariable("featureType") Integer featureType) {
 		logger.info("ejecutando metodo findAllPantallas");
-		ResponsePaginationType response = featureDao.buscarFeaturePantalla(pagesize,pageNumber);
+		ResponsePaginationType response = featureDao.buscarFeaturePantalla(pagesize,pageNumber, featureType);
 		String json = new Gson().toJson(response);
 		return json;
 	}

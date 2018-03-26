@@ -16,6 +16,9 @@
         <class>com.discovery.feature.portal.mvc.entity.StepsTab</class>  
         <class>com.discovery.feature.portal.mvc.entity.ExampleTab</class>
         <class>com.discovery.feature.portal.mvc.entity.TypeFeatureTab</class>
+        <class>com.discovery.feature.portal.mvc.entity.RowsTab</class>
+        <class>com.discovery.feature.portal.mvc.entity.CellsTab</class>
+        
         
 		<properties>
 			<!-- Properties for Hibernate -->

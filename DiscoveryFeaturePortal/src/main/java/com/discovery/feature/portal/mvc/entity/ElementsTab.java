@@ -91,8 +91,8 @@ public class ElementsTab {
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "STEPS_ELEMENT", joinColumns = {@JoinColumn(name = "ELEMENT_ID") },
-	inverseJoinColumns = {@JoinColumn(name = "STEP_ID") })
+	@JoinTable(name = "EXAMPLE_ELEMENT", joinColumns = {@JoinColumn(name = "ELEMENT_ID") },
+	inverseJoinColumns = {@JoinColumn(name = "EXAMPLE_ID") })
 	public List<ExampleTab> getExamples() {
 		return examples;
 	}

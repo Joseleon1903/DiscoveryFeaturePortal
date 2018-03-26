@@ -30,8 +30,13 @@ INSERT INTO WILDFLY.steps_tab (STEP_ID, keyword, name) VALUES ('4', 'Y', 'he sel
 INSERT INTO WILDFLY.steps_tab (STEP_ID, keyword, name) VALUES ('5', 'Y', 'he Seleccionado la pestaña \\\"Detalle\\\"');
 INSERT INTO WILDFLY.steps_tab (STEP_ID, keyword, name) VALUES ('6', 'Y', 'existen las Plantillas de Materiales:');
 
+/* TABLE:  TYPE_FEATURE_TAB */
+INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('1', 'Pantalla');
+INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('2', 'Flujos');
+INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('3', 'Mixto');
+
 /* TABLE:  feature_tab */
-INSERT INTO WILDFLY.feature_tab (FEATURE_ID, description, id, keyword, name, uri) VALUES ('1', 'como usuario del sistema, presiono el boton guardar, espero poder guardar los cambios a una Plantilla de Materiales', 'guardar-plantilla-de-materiales', 'Característica', 'Guardar Plantilla de Materiales', 'C:\\\\Users\\\\Jose Eduardo\\\\eclipse-workspace\\\\PruebaLecturaFeature\\\\src\\\\com\\\\java\\\\resource\\\\feature\\\\Boton Guardar Detalle.feature');
+INSERT INTO WILDFLY.feature_tab (FEATURE_ID, description, id, keyword, name, uri, TYPE_FEATURE_ID) VALUES ('1', 'como usuario del sistema, presiono el boton guardar, espero poder guardar los cambios a una Plantilla de Materiales', 'guardar-plantilla-de-materiales', 'Característica', 'Guardar Plantilla de Materiales', 'C:\\\\Users\\\\Jose Eduardo\\\\eclipse-workspace\\\\PruebaLecturaFeature\\\\src\\\\com\\\\java\\\\resource\\\\feature\\\\Boton Guardar Detalle.feature',1);
 
 /*TABLE: tags_feature */
 INSERT INTO WILDFLY.tags_feature (FEATURE_ID, TAG_ID) VALUES ('1', '1');
@@ -73,9 +78,34 @@ INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('1', '8');
 INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('1', '9');
 INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('1', '10');
 
-INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('1', 'Pantalla');
-INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('2', 'Flujos');
-INSERT INTO "WILDFLY"."TYPE_FEATURE_TAB" (TYPE_FEATURE_ID, TYPE) VALUES ('3', 'Mixto');
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ---- Inserciones para flujos --- */
+
+INSERT INTO "WILDFLY"."FEATURE_TAB" (FEATURE_ID, DESCRIPTION, ID, KEYWORD, NAME, URI, TYPE_FEATURE_ID) VALUES ('2', 'Tarea enviar el resultado de activacion de STB/SmartCard a movil', 'enviar-respuesta-activacion-stb', 'Característica', 'Enviar respuesta activacion STB', 'C:\\Users\\jleon\\eclipse-workspace\\PruebaLecturaFeature\\src\\com\\java\\resource\\feature\\EnviarRespuestaActivacionSTB.feature', '2');
+
+INSERT INTO "WILDFLY"."TAGS_TAB" (TAG_ID, NAME) VALUES ('8', '@flujo');
+INSERT INTO "WILDFLY"."TAGS_TAB" (TAG_ID, NAME) VALUES ('9', '@ActivacionSTBSmartCard');
+
+INSERT INTO "WILDFLY"."TAGS_FEATURE" (FEATURE_ID, TAG_ID) VALUES ('2', '8');
+INSERT INTO "WILDFLY"."TAGS_FEATURE" (FEATURE_ID, TAG_ID) VALUES ('2', '9');
+
+INSERT INTO "WILDFLY"."COMMENTS_TAB" (COMMENT_ID, VALUE) VALUES ('2', '# language: es');
+
+INSERT INTO "WILDFLY"."COMMENTS_FEATURE" (FEATURE_ID, COMMENT_ID) VALUES ('2', '2');
+
+INSERT INTO "WILDFLY"."ELEMENTS_TAB" (ELEMENT_ID, KEYWORD, NAME, TYPE) VALUES ('6', 'Esquema del escenario', 'Enviar respuesta activacion STB satisfactoriamente', 'scenario_outline');
+
+INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, NAME) VALUES ('7', 'Dado ', 'He eliminado todo proceso \"<proceso>\" key \"<flujo>\" con orden id interno de orden de trabajo \"<orden>\"');
+INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, NAME) VALUES ('8', 'Y ', 'He iniciado el proceso \"<proceso>\" key \"<flujo>\" con orden de trabajo \"<mensaje>\" e inicializado la variable \"workOrderId\" con id interno orden de trabajo');
+INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, NAME) VALUES ('9', 'Cuando ', 'He activado la actividad \"<actividad>\" id \"<actividadid>\" para id interno de orden \"<orden>\"');
+INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, NAME) VALUES ('10', 'Entonces ', 'Debe lanzar exception \"NotImplementedException\"');
+
+INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '7');
+INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '8');
+INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '9');
+INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '10');
+
+INSERT INTO "WILDFLY"."EXAMPLE_TAB" (EXAMPLE_ID, ID, NAME) VALUES ('1', 'enviar-respuesta-activacion-stb;enviar-respuesta-activacion-stb-satisfactoriamente;escenarios', 'Escenarios')
 
 
 commit;

@@ -137,7 +137,7 @@ new Vue({
     },
     methods:{
     	 buscarFeaturePantalla: function (showNumber, pageIndex) {
-    		 this.$http.get(URL_BASE+"Feature/buscarPantallas/"+showNumber+"/"+pageIndex).then(response => {
+    		 this.$http.get(URL_BASE+"Feature/buscarPantallas/"+showNumber+"/"+pageIndex+"/"+1).then(response => {
     	         this.featureList = response.data.typeList;
     	         this.totalRegistros = response.data.pagination.registrosRestantes;
     	         this.numeroPaginas = Math.ceil(this.totalRegistros / this.pageShow);
