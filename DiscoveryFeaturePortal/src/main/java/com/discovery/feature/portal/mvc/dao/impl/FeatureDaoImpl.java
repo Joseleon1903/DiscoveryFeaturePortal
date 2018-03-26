@@ -67,7 +67,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 	}
 
 	@Override
-	public BuscarDetalleFeatureType buscarDetalleFeature(long featureId) {
+	public BuscarDetalleFeatureType buscarDetalleFeaturePantalla(long featureId) {
 		Connection connexion = null;
 		PreparedStatement stmt = null;
 		BuscarDetalleFeatureType detalle = new BuscarDetalleFeatureType();

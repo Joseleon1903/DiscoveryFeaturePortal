@@ -48,7 +48,7 @@ public class FeatureController {
 	@RequestMapping(value = "/buscarDetallefeature/{featureId}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public @ResponseBody String findDetailsFeature(@PathVariable("featureId") Long featureId) {
 		logger.info("ejecutando metodo findDetailsFeature");
-		BuscarDetalleFeatureType detalle = featureDao.buscarDetalleFeature(featureId);
+		BuscarDetalleFeatureType detalle = featureDao.buscarDetalleFeaturePantalla(featureId);
 		String json = new Gson().toJson(detalle);
 		return json;
 	}

@@ -18,7 +18,7 @@ public interface FeatureDao {
 	
 	ResponsePaginationType buscarFeatureFlujos(int pageSize, int pageNumber, int featureType);
 	
-	BuscarDetalleFeatureType buscarDetalleFeature(long featureId);
+	BuscarDetalleFeatureType buscarDetalleFeaturePantalla(long featureId);
 	
 	List<BuscarFeatureType> buscarFeatureParametrizado(int pageSize, int pageNumber,String parametro );
 

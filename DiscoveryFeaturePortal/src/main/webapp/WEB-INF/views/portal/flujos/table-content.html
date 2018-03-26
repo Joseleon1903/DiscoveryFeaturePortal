@@ -79,11 +79,26 @@
 	<!-- /.panel -->
 </transition>
 
+<transition name="slide-fade">
+<div class="col-lg-4" v-if="!showViewA" style="width: 80%;">
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3><b>{{titleDetalle}}</b></h3></div>
+          <div class="panel-body">
+          <h4><b>Escenario</b></h4>
+           
+           
+          </div>
+          <div class="panel-footer" style="float: right;">
+              <button type="button" class="fa-arrow-circle-left btn" @click="retunPageFeature()">Back</button>
+          </div>
+      </div>
+  </div>
+
+</transition>
 
 </div>
 <script>
 
-             
 new Vue({
 	el: '#view-flujos',
 	data : {
@@ -124,6 +139,14 @@ new Vue({
     			 this.numberPageSelected =this.numberPageSelected - 1;
     			 this.buscarFeatureFlujos(this.pageShow,this.numberPageSelected );
 			}
+    	 },
+    	 retunPageFeature:function(){
+    		 this.showViewA = !this.showViewA;
+    	 },
+    	 showDetalleFeature:function(feature){
+    		 //this.buscarFeatureFlujos(feature.featureId);
+    		 this.showViewA = !this.showViewA;
+    		 this.titleDetalle= "Detalle Flujo Feature " +" "+feature.nombre ;
     	 },
     	 retunPageFeature:function(){
     		 this.showViewA = !this.showViewA;
