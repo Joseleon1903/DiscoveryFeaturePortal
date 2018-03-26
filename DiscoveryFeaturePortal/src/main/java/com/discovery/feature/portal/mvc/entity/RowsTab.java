@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,6 +25,7 @@ public class RowsTab implements Serializable{
 	
 	private long rowId;
 	private String id;
+	private ExampleTab example;
 	private List<CellsTab> cells;
 
 	public RowsTab() {
@@ -55,13 +58,21 @@ public class RowsTab implements Serializable{
 
 	public void setCells(List<CellsTab> cells) {
 		this.cells = cells;
+	}	
+
+	@ManyToOne
+    @JoinColumn(name="EXAMPLE_ID", nullable=false)
+	public ExampleTab getExample() {
+		return example;
+	}
+
+	public void setExample(ExampleTab example) {
+		this.example = example;
 	}
 
 	@Override
 	public String toString() {
-		return "RowsTab [rowId=" + rowId + ", id=" + id + ", cells=" + cells + "]";
+		return "RowsTab [rowId=" + rowId + ", id=" + id + ", example=" + example + ", cells=" + cells + "]";
 	}
-	
-	
 
 }

@@ -1,11 +1,15 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,13 +19,14 @@ import javax.persistence.Table;
 		 @NamedQuery(name="ExampleTab.BuscarTodos", query="SELECT e FROM ExampleTab e") ,
 		 @NamedQuery(name="ExampleTab.BuscarPorId", query="SELECT e FROM ExampleTab e WHERE e.exampleId = :exampleId")
 })
-public class ExampleTab {
+public class ExampleTab implements Serializable{
 
 	
 	private Long exampleId;
 	private String name;
 	private String description;
 	private String id;
+	private List<RowsTab> rows;
 	
 	public ExampleTab() {
 		// TODO Auto-generated constructor stub
@@ -60,6 +65,15 @@ public class ExampleTab {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	@OneToMany(mappedBy="example")
+	public List<RowsTab> getRows() {
+		return rows;
+	}
+
+	public void setRows(List<RowsTab> rows) {
+		this.rows = rows;
 	}
 	
 	

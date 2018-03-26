@@ -1,5 +1,6 @@
 package com.discovery.feature.portal.mvc.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 		 @NamedQuery(name="ElementsTab.BuscarTodos", query="SELECT e FROM ElementsTab e") ,
 		 @NamedQuery(name="ElementsTab.BuscarPorId", query="SELECT e FROM ElementsTab e WHERE e.elementId = :elementId")
 })
-public class ElementsTab {
+public class ElementsTab implements Serializable {
 	
 	
 	private Long elementId;

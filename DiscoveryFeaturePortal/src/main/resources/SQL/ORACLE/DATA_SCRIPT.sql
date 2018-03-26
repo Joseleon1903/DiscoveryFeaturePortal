@@ -51,7 +51,7 @@ INSERT INTO WILDFLY.comments_feature (FEATURE_ID, COMMENT_ID) VALUES ('1', '1');
 INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('1', 'Y ', '18', 'He llenado los campos con la Informacion:');
 INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('2', 'Cuando ', '23', 'Hago click en el boton \"Guardar\"');
 INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('3', 'Entonces ', '24', 'Espero que la Informacion en los campos se persista');
-INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('4', 'Y ', '25', 'Se muestren los Campos con la Informacion:')
+INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('4', 'Y ', '25', 'Se muestren los Campos con la Informacion:');
 
 
 INSERT INTO "WILDFLY"."STEPS_TAB" (STEP_ID, KEYWORD, LINE, NAME) VALUES ('5', 'Y ', '33', 'He llenado los campos con la Informacion:');
@@ -105,7 +105,28 @@ INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '8');
 INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '9');
 INSERT INTO "WILDFLY"."STEPS_ELEMENT" (ELEMENT_ID, STEP_ID) VALUES ('6', '10');
 
-INSERT INTO "WILDFLY"."EXAMPLE_TAB" (EXAMPLE_ID, ID, NAME) VALUES ('1', 'enviar-respuesta-activacion-stb;enviar-respuesta-activacion-stb-satisfactoriamente;escenarios', 'Escenarios')
+INSERT INTO "WILDFLY"."EXAMPLE_TAB" (EXAMPLE_ID, ID, NAME) VALUES ('1', 'enviar-respuesta-activacion-stb;enviar-respuesta-activacion-stb-satisfactoriamente;escenarios', 'Escenarios');
 
+INSERT INTO "WILDFLY"."EXAMPLE_ELEMENT" (ELEMENT_ID, EXAMPLE_ID) VALUES ('6', '1');
+
+insert into ROWS_TAB(row_id , ID, EXAMPLE_ID)values(1,'enviar-respuesta-activacion-stb;enviar-respuesta-activacion-stb-satisfactoriamente;escenarios;1',1);
+
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('1', 'mensaje', '1');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('2', 'orden', '1');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('3', 'flujo', '1');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('4', 'proceso', '1');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('5', 'actividad', '1');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('6', 'actividadid', '1');
+
+INSERT INTO "WILDFLY"."ROWS_TAB" (ROW_ID, ID, EXAMPLE_ID) VALUES ('2', 'enviar-respuesta-activacion-stb;enviar-respuesta-activacion-stb-satisfactoriamente;escenarios;2', '1');
+
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('7', 'agregarstbdth.xml', '2');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('8', '14247774', '2');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('9', 'EAID_C52F4272_FCCE_4e4d_B0D5_7447484F5CB4', '2');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('10', 'Activa STB/Smartcard', '2');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('11', 'Envia respuesta de activacion STB', '2');
+INSERT INTO "WILDFLY"."CELLS_TAB" (CELL_ID, CONTENT, ROW_ID) VALUES ('12', 'EAID_CF0D44FA_EAE8_4bfc_8ACC_AF8557BA7B2E', '2');
+
+INSERT INTO "WILDFLY"."ELEMENTS_FEATURE" (FEATURE_ID, ELEMENT_ID) VALUES ('2', '6');
 
 commit;
