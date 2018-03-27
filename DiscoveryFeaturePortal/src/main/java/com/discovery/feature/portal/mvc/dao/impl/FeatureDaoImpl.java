@@ -159,6 +159,22 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 			while (rs.next()) {
 				detalle.getSteps().add(rs.getString("KEYWORD") + " "+ rs.getString("NAME"));
 			}
+			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_OBJETOS_FLUJO);
+			stmt.setLong(1, featureId);
+			rs = stmt.executeQuery();
+			List<String> content =  new ArrayList<>();
+			while (rs.next()) {
+				content.add(rs.getString("CONTENT"));
+			}
+			int sliteParam = content.size() / 2;
+			for (int i = 0; i < content.size(); i++) {
+				if (i < sliteParam) {
+					detalle.getParamKey().add(content.get(i));
+				}
+				if (i >= sliteParam) {
+					detalle.getParamValue().add(content.get(i));
+				}
+			}		
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

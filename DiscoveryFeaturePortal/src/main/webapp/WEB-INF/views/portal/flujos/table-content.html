@@ -91,6 +91,35 @@
                </ul>
            </blockquote>
            </br>
+           
+            <div style="width: 100%; font-size: 12px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <p class="lead"> Ejemplos: Escenario</p>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr >
+                                        <th v-for="detHead in detalleTabHead">{{detHead}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-for="detBody in detalleTabBody">{{detBody}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                 <!-- /.panel -->
+             </div>
+           
           </div>
           <div class="panel-footer" style="float: right;">
               <button type="button" class="fa-arrow-circle-left btn" @click="retunPageFeature()"> <img src="<c:url value="/static/resources/img/icon/left_black_Arrow_icon.png"/>" /> Volver</button>
@@ -115,6 +144,8 @@ new Vue({
     	totalRegistros: 0,
     	numberPageSelected: 1,
     	steps: [],
+    	detalleTabHead: [],
+    	detalleTabBody:[],
     },
 	created: function(){
 		console.log('iniciando vue pantalla.');
@@ -133,6 +164,8 @@ new Vue({
     	buscarDetalleFlujoFeature: function (featureId) {
    		 this.$http.get(URL_BASE+"Feature/buscarDetalleFlujos/"+featureId).then(response => {
    	         this.steps = response.data.steps;
+   	         this.detalleTabHead = response.data.paramKey;
+   	         this.detalleTabBody = response.data.paramValue;
    	     }, response => {
    	         console.log('response error : '+response.status);
    	     }); 
