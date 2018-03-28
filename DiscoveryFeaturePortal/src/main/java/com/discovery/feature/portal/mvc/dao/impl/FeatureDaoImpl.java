@@ -52,7 +52,7 @@ public class FeatureDaoImpl extends AbstractJpaDao<Long, FeatureTab> implements 
 		logger.info("countResults: " + countResults);
 		int totalPageNumber = (int) (Math.ceil(countResults / pageSize));
 		logger.info("paginas totales: " + totalPageNumber);
-		Query selectQuery = entityManager.createQuery("From FeatureTab WHERE typeFeature.typeFeatureId = "+ featureType);
+		Query selectQuery = entityManager.createQuery("From FeatureTab WHERE typeFeature.typeFeatureId = "+ featureType + " order by featureId ASC");
 		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
 		selectQuery.setMaxResults(pageSize);
 		@SuppressWarnings("unchecked")
