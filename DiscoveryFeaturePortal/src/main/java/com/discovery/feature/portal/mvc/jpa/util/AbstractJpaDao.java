@@ -7,25 +7,23 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.sql.DataSource;
 import javax.transaction.Transactional;
 
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class AbstractJpaDao<ID, E> {
 	
-	@PersistenceContext
+//	@PersistenceContext
 	protected EntityManager entityManager;
 	
 	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	private DataSource dataSource;
+//	@Autowired
+//	private DataSource dataSource;
 	
 	protected Class<E> entityClass;
 	protected E entity;
@@ -157,7 +155,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	 * @return the DataSource
 	 */
 	public DataSource getDataSource() {
-		return dataSource;
+		return null;
 	}
 	
 

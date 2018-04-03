@@ -2,10 +2,8 @@ package com.discovery.feature.portal.mvc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +15,6 @@ import com.discovery.feature.portal.mvc.entity.EstadisticaReportTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractJpaDao;
 import com.discovery.feature.portal.mvc.type.EstadisticaReportType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
-import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
 import com.discovery.feature.query.ConstantQuery;
 
 @Repository
