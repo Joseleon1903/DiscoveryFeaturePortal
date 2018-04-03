@@ -32,6 +32,8 @@ function setRequestGetBase(context,url){
          responseOut = response.data;
          context.totalPatallas = responseOut.contadorPantalla;
          context.totalFlujos = responseOut.contadorFlujo;
+         COUNT_PANTALLA = responseOut.contadorPantalla;;
+         COUNT_FLUJO=responseOut.contadorFlujo;;
          console.log('response data: '+ responseOut);
      }, response => {
          console.log('response error : '+response.status);

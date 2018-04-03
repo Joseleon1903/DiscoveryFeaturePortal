@@ -44,6 +44,57 @@
                     </div>
                 </div>
 </div>
+<div class="panel panel-default" style="width: 35%;">
+    <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+    </div>
+    <div class="panel-body">
+    
+     <canvas id="circle-graphics" width="600" height="400"></canvas>
+    
+        <a href="#" class="btn btn-default btn-block">Update Details</a>
+    </div>
+    <!-- /.panel-body -->
+</div>
+<script type="text/javascript">
+	
+	
+	
+	$.get(URL_BASE+'EstadisticaController/buscarUltima/', function( data ) {
+		
+		var oilCanvas = document.getElementById("circle-graphics");
+		
+		Chart.defaults.global.defaultFontFamily = "Lato";
+		Chart.defaults.global.defaultFontSize = 18;
+
+		var responseOut = data;
+		var num1 = responseOut.contadorPantalla;
+		var num2 = responseOut.contadorFlujo;
+		
+		var oilData = {
+			    labels: [
+			        "Feature Pantallas",
+			        "Feature Flujos",
+			    ],
+			    datasets: [
+			        {
+			            data: [num1, num2],
+			            backgroundColor: [
+			                "#679dc6",
+			                "#5cb85c"
+			            ]
+			        }]
+			};
+			
+			var pieChart = new Chart(oilCanvas, {
+			  type: 'pie',
+			  data: oilData
+			});
+		
+	});
+	
+	
+</script>
 <script>
 
 new Vue({
@@ -56,7 +107,7 @@ new Vue({
 	created: function(){
 		console.log('iniciando vue.');
 		var self = this;
-		var repons = setRequestGetBase(self, 'EstadisticaController/buscarUltima/');
+		var repons = setRequestGetBase(self, 'EstadisticaController/buscarUltima/');		
     },
     
 

@@ -19,6 +19,7 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	private String nombre;
 	private String idioma;
 	private String caracteristica;
+	private long type;
 
 	public FeatureType() {}	
 
@@ -61,11 +62,20 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 	public void setCaracteristica(String caracteristica) {
 		this.caracteristica = caracteristica;
 	}
+	
+
+	public long getType() {
+		return type;
+	}
+
+	public void setType(long type) {
+		this.type = type;
+	}
 
 	@Override
 	public String toString() {
 		return "FeatureType [featureId=" + featureId + ", nombre=" + nombre + ", idioma=" + idioma + ", caracteristica="
-				+ caracteristica + "]";
+				+ caracteristica + ", type=" + type + "]";
 	}
 
 	@Override
@@ -74,6 +84,7 @@ public class FeatureType implements Serializable, BuscableType<FeatureType, Feat
 		this.featureId = entity.getFeatureId();
 		this.idioma = GenericMapping.buscarIdiomaEnComments(entity.getComments());
 		this.caracteristica = entity.getDescription();
+		this.type = entity.getTypeFeature().getTypeFeatureId();
 		return this;
 	}
 
