@@ -32,5 +32,7 @@ public class ConstantQuery {
 			"join Rows_TAB rw ON ex.EXAMPLE_ID = rw.EXAMPLE_ID\r\n" + 
 			"join CELLS_TAB cl on rw.row_id = cl.Row_id\r\n" + 
 			"where ft.FEATURE_ID = ? order by cl.CELL_ID ASC";
+	
+	public static String INSERT_ESTADISTICA = "insert into ESTATISTICA_REPORT_TAB (ESTADISTICA_REPORT_ID,CONTADOR_FEATURE,CONTADOR_FLUJO,CONTADOR_PANTALLA) values (?,?,?,?)";
 
 }

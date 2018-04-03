@@ -3,8 +3,6 @@ package com.discovery.feature.portal.mvc.rest.controller;
 import java.util.List;
 
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +24,7 @@ public class FeatureController {
 	
 	private static final Logger logger = Logger.getLogger(FeatureController.class);
 
-	@Autowired
-	@Qualifier("featureDaoImpl")
+
 	private FeatureDaoImpl featureDao;
 
 	@RequestMapping(value = "/buscarTodos", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)

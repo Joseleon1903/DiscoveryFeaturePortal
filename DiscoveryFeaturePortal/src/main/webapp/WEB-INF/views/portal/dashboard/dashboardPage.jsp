@@ -51,7 +51,7 @@
                       <!-- // importando resumen  end-->
                       
                      <!--  importando circulo con estadistica  --> 
-                     <%@ include file="circle-statics-row.html" %>
+<%--                      <%@ include file="circle-statics-row.html" %> --%>
                      <!-- // importando circulo con estadistica  --> 
                     
                 </div>
