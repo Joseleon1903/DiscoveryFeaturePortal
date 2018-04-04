@@ -15,8 +15,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 
 @Configuration
+@ComponentScan(basePackages = "com.discovery")
 @EnableWebMvc
-@ComponentScan(basePackages = "com.discovery.feature.portal.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter{
 	
 //	

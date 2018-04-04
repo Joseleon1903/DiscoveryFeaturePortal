@@ -1,13 +1,14 @@
 package com.discovery.feature.portal.mvc.rest.controller;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.discovery.feature.portal.mvc.dao.impl.EstadisticasDaoImpl;
+import com.discovery.feature.portal.mvc.dao.EstadisticasDao;
 import com.discovery.feature.portal.mvc.type.EstadisticaReportType;
 
 @Controller
@@ -16,12 +17,13 @@ public class EstadisticaController {
 
 	private static final Logger logger = Logger.getLogger(EstadisticaController.class);
 
-	private EstadisticasDaoImpl estatisticasDao;
+	@Autowired
+	private EstadisticasDao estadisticasDao;
 	
 	@RequestMapping(value = "/buscarUltima", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public @ResponseBody EstadisticaReportType findAll() {
 		logger.info("ejecutando metodo buscarTodos");
-		EstadisticaReportType type = estatisticasDao.buscarUltimaEstadisticaGeneral();
+		EstadisticaReportType type = estadisticasDao.buscarUltimaEstadisticaGeneral();
 		return type;
 	}
 
