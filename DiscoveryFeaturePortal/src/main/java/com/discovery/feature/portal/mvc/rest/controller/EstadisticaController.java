@@ -20,8 +20,10 @@ public class EstadisticaController {
 	@Autowired
 	private EstadisticasDao estadisticasDao;
 	
+	
+	
 	@RequestMapping(value = "/buscarUltima", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public @ResponseBody EstadisticaReportType findAll() {
+	public @ResponseBody EstadisticaReportType findLastStatistics() {
 		logger.info("ejecutando metodo buscarTodos");
 		EstadisticaReportType type = estadisticasDao.buscarUltimaEstadisticaGeneral();
 		return type;
