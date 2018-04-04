@@ -23,6 +23,11 @@ import javax.persistence.Table;
 		@NamedQuery(name = "FeatureTab.BuscarPorId", query = "SELECT f FROM FeatureTab f WHERE f.featureId = :featureId") })
 public class FeatureTab implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8937387821895050261L;
+	
 	private Long featureId;
 	private String name;
 	private String description;
@@ -149,8 +154,8 @@ public class FeatureTab implements Serializable{
 	 *
 	 */
 	public static interface NameQuery {
-		String FIND_ALL = "FeatureTab.BuscarTodos";
-		String FIND_BY_ID = "FeatureTab.BuscarPorId";
+		String FIND_ALL = "SELECT f FROM FeatureTab f";
+		String FIND_BY_ID = "SELECT f FROM FeatureTab f WHERE f.featureId = :featureId";
 	}
 
 }

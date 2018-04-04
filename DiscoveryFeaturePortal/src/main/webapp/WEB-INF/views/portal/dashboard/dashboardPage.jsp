@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Discovery WebApp</title>
     <!-- Bootstrap Core CSS -->
-    <link href="<c:url value="/static/resources/assets//bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/resources/assets/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
     <!-- MetisMenu CSS -->
     <link href="<c:url value="/static/resources/assets/metisMenu/metisMenu.min.css"/>" rel="stylesheet">
@@ -51,7 +51,7 @@
                       <!-- // importando resumen  end-->
                       
                      <!--  importando circulo con estadistica  --> 
-                     <%@ include file="circle-statics-row.html" %>
+<%--                      <%@ include file="circle-statics-row.html" %> --%>
                      <!-- // importando circulo con estadistica  --> 
                     
                 </div>

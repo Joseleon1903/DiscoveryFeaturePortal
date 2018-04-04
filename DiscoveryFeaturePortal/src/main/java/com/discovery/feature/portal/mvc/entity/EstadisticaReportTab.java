@@ -33,8 +33,7 @@ public class EstadisticaReportTab implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public EstadisticaReportTab(long estatisticaReportId, int contadorPantalla, int contadorFlujos,
-			int contadorFeature) {
+	public EstadisticaReportTab(long estatisticaReportId, int contadorPantalla, int contadorFlujos, int contadorFeature) {
 		super();
 		this.estadisticaReportId = estatisticaReportId;
 		this.contadorPantalla = contadorPantalla;

@@ -7,21 +7,23 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class AbstractJpaDao<ID, E> {
 	
-	@PersistenceContext
+//	@PersistenceContext
 	protected EntityManager entityManager;
 	
-	@Autowired
-	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
+	
+//	@Autowired
+//	private DataSource dataSource;
 	
 	protected Class<E> entityClass;
 	protected E entity;
@@ -61,8 +63,6 @@ public abstract class AbstractJpaDao<ID, E> {
 			entityManager.find(clazz, id);
 			entityManager.flush();
 			entityManager.merge(entity);
-//			entityManager.refresh(entity);
-//			entityManager.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
 			throw new PersistenceException(e);
@@ -129,10 +129,11 @@ public abstract class AbstractJpaDao<ID, E> {
      * 
      * @param entity
      */
-	public void registrarEntity(E entity) throws PersistenceException, EntityExistsException {
+    @Transactional 
+	public E registrarEntity(E entity) throws PersistenceException, EntityExistsException {
+		this.entity = entity;
 		try {
-			entityManager.persist(entity);
-			entityManager.getTransaction().commit();
+			this.entityManager.persist(entity);
 		} catch (EntityExistsException e) {
 			logger.info(e.getMessage());
 			throw new EntityExistsException(e);
@@ -140,6 +141,7 @@ public abstract class AbstractJpaDao<ID, E> {
 			logger.info(e.getMessage());
 			throw new PersistenceException(e);
 		}
+		return this.entity;
 	}
 	
 	/**
@@ -153,7 +155,7 @@ public abstract class AbstractJpaDao<ID, E> {
 	 * @return the DataSource
 	 */
 	public DataSource getDataSource() {
-		return dataSource;
+		return null;
 	}
 	
 
