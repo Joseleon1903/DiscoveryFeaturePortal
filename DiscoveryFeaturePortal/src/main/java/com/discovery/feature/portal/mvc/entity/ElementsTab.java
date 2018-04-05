@@ -25,6 +25,11 @@ import javax.persistence.Table;
 public class ElementsTab implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4274394488292432886L;
+	
 	private Long elementId;
     private String name;
     private String description;

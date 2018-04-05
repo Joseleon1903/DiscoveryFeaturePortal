@@ -3,14 +3,22 @@ package com.discovery.feature.portal.mvc.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.discovery.feature.portal.mvc.constante.ParametrosCatalogoConstante;
 import com.discovery.feature.portal.mvc.dao.FeatureDao;
+import com.discovery.feature.portal.mvc.entity.ElementsTab;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractDao;
+import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
+import com.discovery.feature.portal.mvc.type.EscenarioType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
+import com.discovery.feature.portal.mvc.type.PaginacionType;
+import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
 
 @Repository("FeatureDao")
 public class FeatureDaoImpl extends AbstractDao<Long, FeatureTab> implements FeatureDao {
@@ -22,69 +30,59 @@ public class FeatureDaoImpl extends AbstractDao<Long, FeatureTab> implements Fea
 	@Transactional
 	public List<FeatureType> buscarTodosLosFeature() {
 		List<FeatureTab> listaEntity = null;
-		Criteria crit = getSession().createCriteria(FeatureTab.class);
+		Criteria crit = getSession().createCriteria(FeatureTab.class).addOrder(Order.asc("featureId"));
 		listaEntity = crit.list();
 		return new FeatureType().toListType(listaEntity);
 	}
 
-//	@Override
-//	public ResponsePaginationType buscarFeaturePantalla(int pageSize, int pageNumber, int featureType) {
-//		logger.info("Entrando en el metodo buscarFeaturePantalla..");
-//		String countQ = "Select count (f.featureId) from FeatureTab f WHERE typeFeature.typeFeatureId = "+ featureType;
-//		Query countQuery = entityManager.createQuery(countQ);
-//		Long countResults = (Long) countQuery.getSingleResult();
-//		logger.info("countResults: " + countResults);
-//		int totalPageNumber = (int) (Math.ceil(countResults / pageSize));
-//		logger.info("paginas totales: " + totalPageNumber);
-//		Query selectQuery = entityManager.createQuery("From FeatureTab WHERE typeFeature.typeFeatureId = "+ featureType + " order by featureId ASC");
-//		selectQuery.setFirstResult((pageNumber * pageSize) - pageSize);
-//		selectQuery.setMaxResults(pageSize);
-//		@SuppressWarnings("unchecked")
-//		List<FeatureTab> lastPage = selectQuery.getResultList();
-//		List<BuscarFeatureType> listaSalida = FeatureMapping.toListBuscarFeatureType(lastPage);
-//		ResponsePaginationType response = new ResponsePaginationType();
-//		response.getTypeList().addAll(listaSalida);
-//		PaginacionType pagination = new PaginacionType();
-//		pagination.setIndexPage(pageNumber);
-//		pagination.setRegistrosRestantes(countResults);
-//		response.setPagination(pagination);
-//		return response;
-//	}
-//
-//	@Override
-//	public BuscarDetalleFeatureType buscarDetalleFeaturePantalla(long featureId) {
-//		Connection connexion = null;
-//		PreparedStatement stmt = null;
-//		BuscarDetalleFeatureType detalle = new BuscarDetalleFeatureType();
-//		try {
-//			connexion = getDataSource().getConnection();
-//			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_FEAT_PANTALLA_ANTECEDENTES);
-//			stmt.setLong(1, featureId);
-//			stmt.setString(2, "Antecedentes");
-//			ResultSet rs = stmt.executeQuery();
-//			while (rs.next()) {
-//				detalle.getAntecedentes().add(rs.getString("KEYWORD") + " "+ rs.getString("DESCRIPCION"));
+	@Override
+	@Transactional
+	public ResponsePaginationType buscarFeaturePantalla(int pageSize, int pageNumber, int featureType) {
+		List<FeatureTab> listaEntity = null;
+		Criteria crit = getSession().createCriteria(FeatureTab.class);
+		crit.add(Restrictions.eq("typeFeature.typeFeatureId",new Long(featureType)));
+		listaEntity = crit.list();
+		ResponsePaginationType response = new ResponsePaginationType();
+		response.getTypeList().addAll(listaEntity);
+		PaginacionType pagination = new PaginacionType();
+		pagination.setIndexPage(pageNumber);
+		pagination.setRegistrosRestantes(new Long(10));
+		response.setPagination(pagination);
+		return response;
+	}
+
+	@Override
+	@Transactional
+	public BuscarDetalleFeatureType buscarDetalleFeaturePantalla(long featureId) {
+		
+		BuscarDetalleFeatureType detalle = new BuscarDetalleFeatureType();
+		
+		Criteria critAnte = getSession().createCriteria(FeatureTab.class, "featureTab");
+		critAnte.add(Restrictions.eq("featureId",featureId));
+		critAnte.createAlias("featureTab.elements", "elements");
+		critAnte.add(Restrictions.eq("elements.keyword",ParametrosCatalogoConstante.KeyWords.CONST_ANTECEDENTE));
+		List<FeatureTab> listaEntityAntecedente = critAnte.list();
+		
+		Criteria critEsce = getSession().createCriteria(FeatureTab.class, "featureTab");
+
+		critEsce.add(Restrictions.eq("featureId",featureId));
+		critEsce.createAlias("featureTab.elements", "elements");
+		critEsce.add(Restrictions.eq("elements.keyword", ParametrosCatalogoConstante.KeyWords.CONST_ESCENARIO));
+		List<FeatureTab> listaEntityEscenario = critEsce.list();
+		
+		for (FeatureTab featureTab : listaEntityAntecedente) {
+			for (ElementsTab elment : featureTab.getElements()) {
+				detalle.getAntecedentes().add(elment.getName());
+			}
+		}
+		
+//		for (FeatureTab featureTab : listaEntityEscenario) {
+//			for (ElementsTab elment : featureTab.getElements()) {
+//				detalle.getEscenarios().add(new EscenarioType());
 //			}
-//			//buscando escenarios
-//			stmt = connexion.prepareStatement(ConstantQuery.BUSCAR_DET_FEAT_PANTALLA_ESCENARIOS);
-//			stmt.setLong(1, featureId);
-//			stmt.setString(2, "Escenario");
-//			rs = stmt.executeQuery();
-//			HashMap<String,List<String>> mapList= new HashMap<>();
-//			while (rs.next()) {
-//				if (!mapList.containsKey(rs.getString("NAME"))) {
-//					mapList.put(rs.getString("NAME"),new ArrayList<>());
-//				}
-//				List<String> array = mapList.get(rs.getString("NAME"));
-//				array.add(rs.getString("KEYWORD") + " "+ rs.getString("DESCRIPCION"));
-//				mapList.put(rs.getString("NAME"),array);
-//			}
-//			detalle.setEscenarios(FeatureMapping.castEscenario(mapList));
-//		}catch (SQLException e) {
-//			e.printStackTrace();
 //		}
-//		return detalle;
-//	}
+		return detalle;
+	}
 //
 //	@Override
 //	public List<BuscarFeatureType> buscarFeatureParametrizado(int pageSize, int pageNumber, String nombre) {
