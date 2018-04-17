@@ -3,6 +3,7 @@ package com.discovery.feature.portal.mvc.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
@@ -13,9 +14,9 @@ import com.discovery.feature.portal.mvc.constante.ParametrosCatalogoConstante;
 import com.discovery.feature.portal.mvc.dao.FeatureDao;
 import com.discovery.feature.portal.mvc.entity.ElementsTab;
 import com.discovery.feature.portal.mvc.entity.FeatureTab;
+import com.discovery.feature.portal.mvc.entity.StepsTab;
 import com.discovery.feature.portal.mvc.jpa.util.AbstractDao;
 import com.discovery.feature.portal.mvc.type.BuscarDetalleFeatureType;
-import com.discovery.feature.portal.mvc.type.EscenarioType;
 import com.discovery.feature.portal.mvc.type.FeatureType;
 import com.discovery.feature.portal.mvc.type.PaginacionType;
 import com.discovery.feature.portal.mvc.type.ResponsePaginationType;
@@ -60,19 +61,26 @@ public class FeatureDaoImpl extends AbstractDao<Long, FeatureTab> implements Fea
 		Criteria critAnte = getSession().createCriteria(FeatureTab.class, "featureTab");
 		critAnte.add(Restrictions.eq("featureId",featureId));
 		critAnte.createAlias("featureTab.elements", "elements");
+		critAnte.createAlias("elements.steps", "stepes");
+		critAnte.setFetchMode("elements", FetchMode.EAGER);
+		critAnte.setFetchMode("stepes", FetchMode.EAGER);
+		critAnte.setFirstResult(0);
+		critAnte.setMaxResults(1);
 		critAnte.add(Restrictions.eq("elements.keyword",ParametrosCatalogoConstante.KeyWords.CONST_ANTECEDENTE));
 		List<FeatureTab> listaEntityAntecedente = critAnte.list();
 		
-		Criteria critEsce = getSession().createCriteria(FeatureTab.class, "featureTab");
-
-		critEsce.add(Restrictions.eq("featureId",featureId));
-		critEsce.createAlias("featureTab.elements", "elements");
-		critEsce.add(Restrictions.eq("elements.keyword", ParametrosCatalogoConstante.KeyWords.CONST_ESCENARIO));
-		List<FeatureTab> listaEntityEscenario = critEsce.list();
+//		Criteria critEsce = getSession().createCriteria(FeatureTab.class, "featureTab");
+//
+//		critEsce.add(Restrictions.eq("featureId",featureId));
+//		critEsce.createAlias("featureTab.elements", "elements");
+//		critEsce.add(Restrictions.eq("elements.keyword", ParametrosCatalogoConstante.KeyWords.CONST_ESCENARIO));
+//		List<FeatureTab> listaEntityEscenario = critEsce.list();
 		
 		for (FeatureTab featureTab : listaEntityAntecedente) {
 			for (ElementsTab elment : featureTab.getElements()) {
-				detalle.getAntecedentes().add(elment.getName());
+				for (StepsTab step : elment.getSteps()) {
+					detalle.getAntecedentes().add(step.getName());
+				}
 			}
 		}
 		
