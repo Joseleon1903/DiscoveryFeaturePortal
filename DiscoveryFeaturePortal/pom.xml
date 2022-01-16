@@ -24,7 +24,7 @@
 		<version.standard.taglibs>1.1.2</version.standard.taglibs>
 		<version.commons.logging>1.1.1</version.commons.logging>
 		<version.cglib>2.2</version.cglib>
-		<org.springframework-version>4.2.2.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.9.RELEASE</org.springframework-version>
 	</properties>
 
 	<dependencies>
