@@ -133,3 +133,9 @@ commands to pull them into your local repository. The IDE should then detect the
 
         mvn dependency:sources
         mvn dependency:resolve -Dclassifier=javadoc
+
+
+
+874600ACADEMIA-22589JQ3
+ link: https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.academiaeset.com%2Fdefault%2Fstore%2F248693&data=05%7C02%7Cjedeleon%40unipago.com.do%7C70998dbe36af4624a18808dd87f0380b%7Cb7290e06f6574998a485948a4d4873c0%7C0%7C0%7C638816188037651608%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=KU5h7%2Fd2cg4wC%2B9cMMBBTNRsFF5NcSqBhAMJMb4p2mU%3D&reserved=0
+link 2 : https://www.academiaeset.com/
